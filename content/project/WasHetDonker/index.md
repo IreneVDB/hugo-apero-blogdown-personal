@@ -43,10 +43,13 @@ You can view all heatmaps for all locations at the [Was het Donker website](http
 
 ---
 
-### Rijswijk (urban area known for its numerous greenhouses :night_with_stars:)
+### Rijswijk (urban area with numerous greenhouses :night_with_stars:)
 
 ![Air Brightness in Hulshorst Aug 2021](http://www.washetdonker.nl/zandloper/Rijswijk/2021/Rijswijk_2021_08.png)
 
 ---
 
 ### Vlieland (rural area on sparsely populated island :milky_way:)
+
+![Air Brightness in Hulshorst Aug 2021](http://www.washetdonker.nl/zandloper/Vlieland-Oost/2021/Vlieland-Oost_2021_08.png)
+
