@@ -24,6 +24,8 @@ links:
   url: https://pubs.acs.org/doi/10.1021/acs.jproteome.9b00854
 ---
 
+![Image of Content Summary](featured.png)
+
 ## Abstract
 
 **INTRODUCTION**: Increased throughput as well as increased multiplexing of selected reaction monitoring mass spectrometry (SRM-MS) assays challenges routine data-analysis. SRM-MS for the quantification of protein biomarkers particularly generates large amounts of data as each protein is measured by multiple SRM transitions from multiple signature peptides. For clinical decision making, nonetheless, the results are interpreted at the individual protein level and only one (quantifier) transition from one (quantifier) peptide is needed to represent the protein abundance. Consequently, data-analysis is spent majorly on data that not directly affects the quantitative result.<p>
