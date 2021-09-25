@@ -1,19 +1,17 @@
 ---
 ## Configure sidebar content in narrow column
-author: "Emily Cooper"
-role: "Social media strategy @ Savoir"
-avatar_shape: rounded # circle, square, rounded
-show_social_links: true # specify social accounts in site config
-show_audio_link: true
-audio_link_label: "How to say my name"
-link_list_label: "Interests" # bookmarks, elsewhere, etc.
+author: "Irene van den Broek"
+role: "Data visualization and quantified self enthusiast"
+avatar_shape: circle # circle, square, rounded
+show_social_links: true 
+show_audio_link: false
+# audio_link_label: "How to say my name"
+link_list_label: "Websites"
 link_list:
-- name: Paris
-  url: https://en.wikipedia.org/wiki/Paris
-- name: Pastries
-  url: https://en.wikipedia.org/wiki/Pastry
-- name: People
-  url: https://en.wikipedia.org/wiki/People
+ - name: Je Bent Wat Je Meet
+   url: https://www.jebentwatjemeet.nl
+ - name: You R What You Measure
+
 ---
 
 ** index doesn't contain a body, just front matter above.
