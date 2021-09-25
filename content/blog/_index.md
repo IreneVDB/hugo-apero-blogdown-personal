@@ -1,7 +1,7 @@
 ---
-title: Blog
+title: You R What You Measure
 description: |
-  Posts related to my **You R What You Measure** project. Posts will include **reviews**, **personal insights**, **tutorials** and **stories** about tracking health and habits with apps, sensors and wearable devices.
+  Posts about tracking, analyzing and visualizing **Health** & **Habits**.
 author: "Irene van den Broek"
 show_post_thumbnail: true
 show_author_byline: true

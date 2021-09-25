@@ -1,7 +1,7 @@
 ---
 title: "Onze Lucht"
 subtitle: "An R Shiny app for air quality sensors in the Netherlands"
-excerpt: "Onze Lucht is a citizen science project in the North of the Netherlands where citizens use home-build sensors to measure air quality (PM2.5, PM10), temperature and humidity. I created an R Shiny app that visualizes monthly air quality in interactive heatmaps."
+excerpt: "Onze Lucht is a citizen science project in the Netherlands where citizens use home-build sensors to measure air quality (PM2.5, PM10), temperature and humidity. I created an R Shiny app that visualizes monthly air quality in interactive heatmaps."
 date: 2021-07-01
 author: "Irene van den Broek"
 draft: false
