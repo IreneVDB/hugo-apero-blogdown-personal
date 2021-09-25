@@ -8,7 +8,7 @@ show_post_time: false
 event: "R/Medicine 2021"
 event_url: https://r-medicine.org
 author: "Irene van den Broek"
-location: "online event"
+location: "Online"
 draft: false
 # layout options: single, single-sidebar
 layout: single
