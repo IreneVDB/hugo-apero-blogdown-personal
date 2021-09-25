@@ -16,13 +16,21 @@ sidebar:
     Posts about tracking, analyzing and visualizing **Health** & **Habits**.
     
   author: "Irene van den Broek"
-  text_link_label: []
+  text_link_label: xxx
   show_sidebar_adunit: false # show ad container
+  show_tags: true
+  tags:
+    - Sleep
+    - Mood
+    - Body
+    - Food
+  categories: Hallo
+  
 
 # set up common front matter for all pages inside blog/
 cascade:
   author: "Irene van den Broek"
-  show_author_byline: false
+  show_author_byline: true
   show_post_date: true
   show_disqus_comments: false # see disqusShortname in site config
   # for single-sidebar layout
