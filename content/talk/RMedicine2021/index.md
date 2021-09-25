@@ -32,6 +32,8 @@ tags: []
 projects: []
 ---
 
+![Image of first slide](featured.png)
+
 ## Abstract
 
 Wearable devices enable continuous, longitudinal collection of physiological or behavioral data. Initially geared towards consumer health enthusiasts, research- and clinical grade wearable devices now find their way into medical research and clinical trials. <p>
