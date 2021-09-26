@@ -18,14 +18,6 @@ sidebar:
   author: "Irene van den Broek"
   text_link_label: xxx
   show_sidebar_adunit: false # show ad container
-  show_tags: true
-  tags:
-    - Sleep
-    - Mood
-    - Body
-    - Food
-  categories: Hallo
-  
 
 # set up common front matter for all pages inside blog/
 cascade:
