@@ -1,6 +1,6 @@
 ---
 title: "Oura Ring"
-weigth: 1
+weigth: 10
 subtitle: "A ring that measures sleep, activity and readiness"
 excerpt: "A post about the Oura Ring"
 date: 2021-09-27
