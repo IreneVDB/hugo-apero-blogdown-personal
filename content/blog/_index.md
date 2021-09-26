@@ -17,6 +17,7 @@ sidebar:
     
   author: "Irene van den Broek"
   text_link_label: xxx
+  text_link_url: /project/
   show_sidebar_adunit: false # show ad container
 
 # set up common front matter for all pages inside blog/

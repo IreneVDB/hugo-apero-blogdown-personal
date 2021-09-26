@@ -1,8 +1,8 @@
 ---
 ## Configure page content in wide column
 title: "You R What You Measure" 
-number_featured: 1 # pulling from mainSections in config.toml
-number_categories: 3 # set to zero to exclude
+number_featured: 2 # pulling from mainSections in config.toml
+number_categories: 4 # set to zero to exclude
 show_intro: true
 intro: |
   Using apps, sensors and wearable devices, I collect and visualize data about my sleep, activity,     nutrition, mood, body, brain, environment, and habits.  Here, I'll share my insights from self-tracking as well as my continuous learning path to improve my data visualization and R programming skills! <p>
