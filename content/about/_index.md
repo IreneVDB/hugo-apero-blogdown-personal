@@ -3,7 +3,7 @@ title: "About"
 description: |
   More about myself
 show_header: false
-sidebar_left: false
+sidebar_left: true
 # Keep this! Do not edit.
 cascade:
   headless: true
