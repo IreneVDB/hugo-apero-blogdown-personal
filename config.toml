@@ -32,7 +32,7 @@ enableEmoji = true
   orgLocal = ""
   description = "A personal website featuring talks, projects and blog posts about insights in Health and Habits through visualization of wearable data."
   favicon = "/img/favicon.ico"
-  logo = "/img/logo_grey.png"
+  logo = "/img/logo_transparent.png"
   mainSections = ["blog", "project", "talk"]
   navallcaps = true
   # show/hide social icons in site header & footer
