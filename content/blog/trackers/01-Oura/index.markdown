@@ -1,29 +1,44 @@
 ---
-title: "Oura Ring"
+title: "Ōura Ring"
 weigth: 1
 subtitle: "A ring that measures sleep, activity and readiness"
-excerpt: "A post about the Oura Ring - but now in another series"
+excerpt: "What is the Ōura Ring and what can you do with the data? An overview my experiences with the Ōura Ring for tracking **Sleep**, **Activity** and **Readiness**. Accompanied by instructions and visualizations on how to access and analyze your Ōura Ring data in R"
 date: 2021-09-26
 draft: false
 ---
 
-
 <img src="featured-Oura.png" width="50%" style="margin-left:25%; margin-right:25%; border-radius:5%"/>
 
-## What is the Oura Ring?
+## What is the Ōura Ring?
 
-<img src="https://play-lh.googleusercontent.com/-9sv7pGewA5xDhZttAWNm8N1p4iGuPctvej8kwBaLs0wm8bweNZGYkYTwcSTxkVq6l8-=s360" width="10%" style="float:left; border-radius:10%; margin-right:5px"/>
+A pretty piece of jewelry on the outside with a variety of sensors hidden on the inside! The [Ōura Ring](https://oura.com) is both a **Sleep** and **Activity** tracker that measures heart and breathing rate, skin temperature, and motion. In the Ōura Ring app you can view your daily **Sleep**, **Activity** and **Readiness** scores as well as *personalized* recommendations about your sleep pattern, recovery, or workout intensity. <p>
 
-A pretty piece of jewelry on the outside with a variety of sensors hidden on the inside! These sensors measure heart rate, heart rate variability, breathing rate, skin temperature, motion and step count. Because of the [Oura Ring](https://oura.com)'s size and looks, you can collect a wealth of data while wearing the ring day and night.
+The Ōura Ring app integrates with the Apple or Samsung Health app and can import your training activity from various third party workout apps. You can also use the Ōura Ring app to take a guided or unguided **mediation** session. When the meditation session is longer than 10 minutes, both heart rate, heart rate variability (HRV) and skin temperature will be measured. Although the effects of the meditation session on these body functions are displayed in the Ōura Ring app afterwards, the raw meditation data is not accessible for further analysis.
 
+## Pros and Cons of the Ōura Ring
 
-De Oura Ring is ook een slaap tracker: aan de hand van je hartslag en beweging bepaalt de ring het tijdstip waarop je in en uit bed gaat, in slaap valt en wakker wordt, en zelfs van de fase van je slaap. Uit onderzoek is gebleken dat de Oura ring enerzijds goed slaap, ofwel de tijd die je in bed ligt, kan detecteren (gevoeligheid van 96%), maar anderzijds minder goed wakkere momenten van echte slaap kan onderscheiden (specificiteit van 48%) of slaapfases kan classificeren (65%, 51% en 61% overeenkomst met lichte, diepe, en REM slaap, respectievelijk) [1].
- 
-Via de app worden deze gegevens gebruikt om je inzicht te geven in je fysieke gesteldheid door middel van een slaapscore, een activiteitscore en een algehele paraatheid (‘readiness’) score. Om deze scores van meer waarde te laten zijn, kun je via de app je trainingen toevoegen, zowel handmatig als door een koppeling met je favoriete trainingsapp. Ook geeft de app de mogelijkheid om begeleide en onbegeleide ontspanningsoefeningen te doen.
+For me, the Ōura Ring stands out for it's **data accessibility** and the **ease of wearing**. Except for the meditation data, all daily activity and nightly sleep data is stored and accessible through the Ōura cloud platform. In addition, the Ōura Ring [API documentation](https://cloud.ouraring.com/docs/) provides a detailed and complete description of all parameters and their weights in the device scoring algorithms. Nonetheless, it is good to know that only aggregated data is accessible, either as a single value or, for a few metrics, aggregated in 1 or 5 minute intervals (See <a href="#how-to-data">0.3</a>)
 
+Although the Ōura Ring isn't cheap, it's fashionable look and compact size, make the Ōura Ring easily worn day and night, collecting a wealth a data with little to no missing data points! The Ōura ring fully charges in about 1-2 hours and lasts for almost 4 days. For use as a sleep tracker, the Ōura Ring is great to keep track of your sleep pattern as well as your resting heart rate, mean HRV and body temperature during the night. The Ōura Ring is, however, not very accurate in sleep staging and differentiating laying down from actual sleeping. 
 
+### Ōura Ring - Pros:
 
-## How to get your Data?
+- Good data visualization options in app and cloud platform.
+- Data is fully accessible through file export or API.
+- No bluetooth connection during inactivity or sleep.
+- Can be worn day and night without noticing.
+- Little "non-wear" time due to charging.
+- Fashionable look.
+
+### Ōura Ring - Cons:
+
+- Not cheap (price starts at $299).
+- Not very accurate in sleep stage detection (certainly not able to differentiate laying still from actual sleeping).
+- Be careful; you don't want to lose or damage the ring!
+- Skin temperature and breathing rate data are only available as a nightly average.
+- Meditation data is not available.
+
+## How to get your data from the Ōura Ring? {#how-to-data}
 
 You can get your data via API, FTTT or exported as json or csv file. See the tabs below for more info and sample code.
 
@@ -49,6 +64,8 @@ And more plots with links here as tiny figures
 ![figure1]("featured-Oura.png")
 
 ## Conclusion
+
+
 
 Pros and cons of the OUra Ring in a table?
 

@@ -24,7 +24,7 @@ sidebar:
     
     <i class="fas fa-running"></i> ACTIVITY: <br>
     
-    <img src="/img/app_logos/Oura.png" width="10%" style="border-radius:10%; margin:5px;"/>
+    <img src="/img/app_logos/Oura.png" width="10%" style="border-radius:10%; margin:5px; filter:grayscale(100%);"/>
     <img src="/img/app_logos/Strava.png" width="10%" style="border-radius:10%; margin:5px;"/>
     <img src="/img/app_logos/iOS_activity.png" width="10%" style="border-radius:10%; margin:5px;"/>
     <img src="/img/app_logos/Stryd.png" width="10%" style="border-radius:10%; margin:5px;"/>
