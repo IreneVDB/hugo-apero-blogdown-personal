@@ -2,7 +2,7 @@
 title: "Ōura Ring"
 weigth: 1
 subtitle: "A ring that measures sleep, activity and readiness"
-excerpt: "What is the Ōura Ring and what can you do with the data? An overview my experiences with the Ōura Ring for tracking **Sleep**, **Activity** and **Readiness**. Accompanied by instructions and visualizations on how to access and analyze your Ōura Ring data in R"
+excerpt: "What is the Ōura Ring and what can you do with the data? An overview of my experiences with the Ōura Ring for tracking **Sleep**, **Activity** and **Readiness**. Accompanied by instructions and visualizations on how to access and analyze your Ōura Ring data in R"
 date: 2021-09-26
 draft: false
 ---
@@ -11,15 +11,71 @@ draft: false
 
 ## What is the Ōura Ring?
 
-A pretty piece of jewelry on the outside with a variety of sensors hidden on the inside! The [Ōura Ring](https://oura.com) is both a **Sleep** and **Activity** tracker that measures heart and breathing rate, skin temperature, and motion. In the Ōura Ring app you can view your daily **Sleep**, **Activity** and **Readiness** scores as well as *personalized* recommendations about your sleep pattern, recovery, or workout intensity. <p>
+A pretty piece of jewelry on the outside with a variety of sensors hidden on the inside! The [Ōura Ring](https://oura.com) is both a **Sleep** and **Activity** tracker that measures heart and breathing rate, skin temperature, and motion to calculate your daily **Sleep**, **Activity** and **Readiness** scores. <p>
 
-The Ōura Ring app integrates with the Apple or Samsung Health app and can import your training activity from various third party workout apps. You can also use the Ōura Ring app to take a guided or unguided **mediation** session. When the meditation session is longer than 10 minutes, both heart rate, heart rate variability (HRV) and skin temperature will be measured. Although the effects of the meditation session on these body functions are displayed in the Ōura Ring app afterwards, the raw meditation data is not accessible for further analysis.
+The Ōura Ring app integrates with the Apple or Samsung Health app as well as various third party workout apps. You can also start a guided or unguided **mediation** session in the Ōura Ring app while the Ōura Ring records your heart rate, heart rate variability (HRV) and skin temperature. 
 
-## Pros and Cons of the Ōura Ring
+## How to get your data from the Ōura Ring?
 
-For me, the Ōura Ring stands out for it's **data accessibility** and the **ease of wearing**. Except for the meditation data, all daily activity and nightly sleep data is stored and accessible through the Ōura cloud platform. In addition, the Ōura Ring [API documentation](https://cloud.ouraring.com/docs/) provides a detailed and complete description of all parameters and their weights in the device scoring algorithms. Nonetheless, it is good to know that only aggregated data is accessible, either as a single value or, for a few metrics, aggregated in 1 or 5 minute intervals (See <a href="#how-to-data">0.3</a>)
+All daily activity and nightly sleep data are stored on your (free) Ōura cloud account. Both the Ōura cloud platform and the Ōura app have some nice features to view daily, weekly or monthly trends in your data. However, if you (like me 😄) want to analyze and visualize your own data, there are several ways to get the data in your own hands.
 
-Although the Ōura Ring isn't cheap, it's fashionable look and compact size, make the Ōura Ring easily worn day and night, collecting a wealth a data with little to no missing data points! The Ōura ring fully charges in about 1-2 hours and lasts for almost 4 days. For use as a sleep tracker, the Ōura Ring is great to keep track of your sleep pattern as well as your resting heart rate, mean HRV and body temperature during the night. The Ōura Ring is, however, not very accurate in sleep staging and differentiating laying down from actual sleeping. 
+In the below panels I discuss two approaches to get your Ōura Ring for further analysis in R: 
+  1. Export your data as a`.csv ` or `.json` file from the Oura cloud account; and
+  2. Connect through Ōura cloud API using a *personal access token*.
+
+I should not that only aggregated data is accessible, either as a single value or, for a few metrics, as average over 1 or 5 minute intervals (See [What does the Oura Ring measure?](metrics))
+
+{{< panelset class="greetings" >}}
+{{< panel name="Export data file" >}}
+
+From your Ōura cloud account you can download data as:
+- `.csv`: Under **<Trends>** select the date range, click **<Download Data>** and choose all or a selection of values.
+- `.json`: Go to **<My Account>** and click the **<Download>** button.
+
+Both `.csv` and `.json` files are easily imported into R:
+
+```r
+Oura_csv <- read.csv("path/to/file/filename.csv", sep=",")
+Oura_json <- jsonlite::fromJSON("path/to/file/filename.json")
+```
+
+{{< /panel >}}
+{{< panel name="Connect with API" >}}
+  jkhkjhkjh
+{{< /panel >}}
+{{< /panelset  >}}
+
+## DOet deze panelset het wel?
+
+{{< panelset class="greetings" >}}
+{{< panel name="Plot" >}}
+
+<img src="{{< blogdown/postref >}}index_files/figure-html/plot-1.png" width="672" />
+
+{{< /panel >}}
+{{< panel name="Code" >}}
+
+
+```r
+plot(pressure)
+```
+
+{{< /panel >}}
+{{< /panelset  >}}
+
+## What does the Oura Ring measure? (#metrics)
+
+The Ōura Ring [API documentation](https://cloud.ouraring.com/docs/) provides a detailed description of all measured parameters.
+
+Here some beeswarm plots and a summary of all the metrics.
+
+<img src="{{< blogdown/postref >}}index_files/figure-html/plot2-1.png" width="672" />
+
+## Ōura Ring: Pros and Cons
+
+The Ōura Ring stands out for it's **data accessibility** and the **ease of wearing**. 
+
+Although the Ōura Ring isn't cheap, it's fashionable look and compact size, make the Ōura Ring easily worn day and night, collecting a wealth a data with little to no missing data points! The Ōura ring fully charges in about 1-2 hours and lasts for almost 4 days. As a sleep tracker, the Ōura Ring is great for tracking your sleep pattern and nightly body functions. However, the Ōura Ring is not very accurate in sleep staging, particularly in differentiating laying down from actual sleeping. 
 
 ### Ōura Ring - Pros:
 
@@ -38,24 +94,10 @@ Although the Ōura Ring isn't cheap, it's fashionable look and compact size, mak
 - Skin temperature and breathing rate data are only available as a nightly average.
 - Meditation data is not available.
 
-## How to get your data from the Ōura Ring? {#how-to-data}
 
-You can get your data via API, FTTT or exported as json or csv file. See the tabs below for more info and sample code.
 
-{{< panelset class="greetings" >}}
-{{< panel name="Hello! :wave:" >}}
-  hello
-{{< /panel >}}
-{{< panel name="Goodbye :dash:" >}}
-  goodbye
-{{< /panel >}}
-{{< /panelset  >}}
 
-## What does the Oura Ring measure?
 
-Here some beeswarm plots and a summary of all the metrics.
-
-<img src="{{< blogdown/postref >}}index_files/figure-html/plot-1.png" width="672" />
 
 ## Data Visualizations
 
@@ -102,22 +144,6 @@ library(tidyverse)
 library(palmerpenguins)
 ```
 
-
-```r
-ggplot(data = penguins, aes(x = flipper_length_mm)) +
-  geom_histogram(aes(fill = species), alpha = 0.5, position = "identity") +
-  scale_fill_manual(values = c("darkorange","darkorchid","cyan4"))
-```
-
-```
-## `stat_bin()` using `bins = 30`. Pick better value with `binwidth`.
-```
-
-```
-## Warning: Removed 2 rows containing non-finite values (stat_bin).
-```
-
-<img src="{{< blogdown/postref >}}index_files/figure-html/unnamed-chunk-2-1.png" width="672" />
 
 ## Some text
 
