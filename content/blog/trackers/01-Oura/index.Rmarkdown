@@ -7,7 +7,61 @@ date: 2021-09-26
 draft: false
 ---
 
-<img src="featured-Oura.png" width="50%" style="margin-left:25%; margin-right:25%; border-radius:5%"/>
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, 
+                      warning = FALSE,
+                      fig.width = 7)
+
+library(tidyverse)
+library(ggtext)
+library(grid)
+
+plot_height_single_beeswarm <- function(p, plot_width, unit){
+  gt <-  ggplotGrob(p)
+  panel <- gt$layout[which(gt$layout$name == "panel"), ]
+  aspect.ratio <- p[["theme"]][["aspect.ratio"]]
+  
+  space_v <- sum(convertUnit(gt$heights[-panel$t], unit, valueOnly=TRUE))
+  space_h <- sum(convertUnit(gt$widths[-panel$l], unit, valueOnly=TRUE))
+  
+  panel_width <- plot_width - space_h
+  panel_height <- panel_width * aspect.ratio
+  
+  plot_height <- panel_height + space_v
+}
+plot_height_beeswarm_grobs <- function(gt, plot_width, unit, ar_single = 0.15){
+  # assuming first grob is ggtext textGrid object, 2nd object is textGrob, 3rd object is egg object
+  title <- gt[["grobs"]][[1]]
+  subtitle <- gt[["grobs"]][[2]]
+  egg_gt <- gt[["grobs"]][[3]]
+  
+  egg_panels <- egg_gt$layout[which(egg_gt$layout$name == "panel"), ]
+  space_v_egg <- sum(convertUnit(egg_gt$heights[-egg_panels$t], unit, valueOnly=TRUE))
+  space_h_egg <- sum(convertUnit(egg_gt$widths[-egg_panels$l], unit, valueOnly=TRUE))
+  nlabels <- sum(as.numeric(egg_gt$heights[egg_panels$t])) / ar_single
+  
+  title_h <- ifelse(grepl("gTree", title$name),
+                    max(convertUnit(grobHeight(title$children), unit, valueOnly = TRUE)),
+                    max(convertUnit(grobHeight(title), unit, valueOnly = TRUE)))
+  subtitle_h <- max(convertUnit(grobHeight(subtitle), unit, valueOnly = TRUE))
+  
+  panel_width <- plot_width - space_h_egg
+  panel_height <- panel_width * nlabels * ar_single
+  
+  plot_height <- panel_height + space_v_egg + title_h + subtitle_h
+
+}
+
+load("~/Documents/R-Projects/Projects/QuantifiedSelf/devices/OuraRing/src/beeswarms/output/oura_beeswarms.RData")
+
+h1 <- plot_height_single_beeswarm(oura_beeswarms[["Total_Scores"]], 7, "in")
+h2 <- plot_height_single_beeswarm(oura_beeswarms[["Scores"]][["Sleep"]], 7, "in")
+h3 <- plot_height_single_beeswarm(oura_beeswarms[["Scores"]][["Activity"]], 7, "in")
+h4 <- plot_height_single_beeswarm(oura_beeswarms[["Scores"]][["Readiness"]], 7, "in")
+h5 <- plot_height_beeswarm_grobs(oura_beeswarms[["metrics"]][["Sleep"]], 7, "in")
+h6 <- plot_height_beeswarm_grobs(oura_beeswarms[["metrics"]][["Activity"]], 7, "in")
+
+```
 
 ## What is the Ōura Ring?
 
@@ -15,20 +69,85 @@ A pretty piece of jewelry on the outside with a variety of sensors hidden on the
 
 The Ōura Ring app integrates with the Apple or Samsung Health app as well as various third party workout apps. You can also start a guided or unguided **mediation** session in the Ōura Ring app while the Ōura Ring records your heart rate, heart rate variability (HRV) and skin temperature. 
 
-## How to get your data from the Ōura Ring?
+## How to get the Ōura Ring's data?
 
 All daily activity and nightly sleep data are stored on your (free) Ōura cloud account. Both the Ōura cloud platform and the Ōura app have some nice features to view daily, weekly or monthly trends in your data. However, if you (like me `r emo::ji("smile")`) want to analyze and visualize your own data, there are several ways to get the data in your own hands:
 
   1. Export your data as a`.csv ` or `.json` file from the Oura cloud account; or
   2. Connect through Ōura cloud API using a *personal access token*.
 
-Note that only aggregated data is accessible, either as a single value or, for a few metrics, as average over 1 or 5 minute intervals (See [What does the Oura Ring measure?](metrics))
+Note that only aggregated data is accessible, either as a single value or, for a few metrics, as average over 1 or 5 minute intervals.
 
-## What does the Oura Ring measure? {#metrics}
+## What does the Oura Ring measure?
 
-The Ōura Ring [API documentation](https://cloud.ouraring.com/docs/) provides a detailed description of all measured parameters. In the charts below I've summarized the distribution of all  *daily average values* as obtained with the `.csv` download.
+The Ōura Ring [API documentation](https://cloud.ouraring.com/docs/) provides a detailed description of all measured parameters. The data from the Ōura Ring includes:
+- Daily Sleep, Activity and Readiness Scores.
+- Daily (or nightly) aggregates (e.g., total sleep hours, step counts, or average breathing rate while asleep)
+- Daily time stamps (e.g., the time you go to bed, fall asleep or get up)
+- Daily or nightly time series (as average per 1 or 5 minute intervals)
 
-# Sleep Times
+### Daily Sleep, Activity or Readiness Scores
+
+Every day the Ōura Ring gives a score for your Sleep, Activity and Readiness. In Figure \@ref(fig:TotalScores_dim), you see the distribution of my scores over `r length(unique(oura_beeswarms$Total_Scores$data$Date))` days of measurement.
+
+```{r TotalScores_dim, echo=FALSE, fig.height=h1, fig.cap="Some caption for this plot"}
+oura_beeswarms[["Total_Scores"]]
+```
+
+Each score is calculated based on the following scores summarized in the panels below:
+
+{{< panelset class="greetings" >}}
+{{< panel name="Sleep" >}}
+
+```{r Sleep_Scores, echo=FALSE, fig.height=h2}
+oura_beeswarms[["Scores"]][["Sleep"]]
+```
+
+{{< /panel >}}
+{{< panel name="Activity" >}}
+
+```{r Activity_Scores, echo=FALSE, fig.height=h3}
+oura_beeswarms[["Scores"]][["Activity"]]
+```
+
+{{< /panel >}}
+{{< panel name="Readiness" >}}
+
+```{r Readiness_Scores, echo=FALSE, fig.height=h4}
+oura_beeswarms[["Scores"]][["Readiness"]]
+```
+
+{{< /panel >}}
+{{< /panelset  >}}
+
+### Daily aggregates
+
+And here an overview of _all_ available daily metrics measured with the Ōura Ring.
+
+{{< panelset class="greetings" >}}
+
+{{< panel name="Sleep" >}}
+
+```{r Sleep_metrics, echo=FALSE, fig.height=h5}
+grid::grid.newpage()
+grid::grid.draw(oura_beeswarms[["metrics"]][["Sleep"]])
+```
+
+{{< /panel >}}
+{{< panel name="Activity" >}}
+
+```{r Activity_metrics, echo=FALSE, fig.height=h6}
+grid::grid.newpage()
+grid::grid.draw(oura_beeswarms[["metrics"]][["Activity"]])
+```
+
+{{< /panel >}}
+{{< /panelset  >}}
+
+
+### Timestamps
+
+### Daily time series
 
 
 
@@ -75,24 +194,6 @@ Pros and cons of the OUra Ring in a table?
 
 ## Resources
 
-A list:
-1. jhgkjg
-2. kjhkjh
-3. kjghkjh
 
-```{r}
-library(tidyverse)
-library(palmerpenguins)
-```
-
-
-## Some text
-
-And here I am using my own lungs like a sucker. __How is education supposed to make me feel smarter?__ *Besides, every time I learn something new, it pushes some old stuff out of my brain.* Remember when I took that home winemaking course, and I forgot how to drive?
-
-Marge, just about everything's a sin. 
-* You know, the one with all the well meaning rules that don't work out in real life, uh, Christianity.
-* Your questions have become more redundant and annoying than the last three "Highlander" movies.
-* D'oh. 
 
 
