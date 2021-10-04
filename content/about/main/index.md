@@ -22,7 +22,7 @@ intro: |
   Here, I'll share my insights from **self-tracking** as well as my **R** and **DataViz** tinkering! <p>
   
     - I give **presentations** and **workshops** about self-tracking, data visualization and/or the R programming language (see [Talks](/talk/) and [Blog](/blog/)). 
-    - I create (interactive) **data visualizations** or **web applications** to support (sensor-based) studies and citizen science projects related to health, lifestyle or living environment (see [Projects](/project/) and [DataViz](dataviz)). <p> 
+    - I create (interactive) **data visualizations** or **web applications** to support (sensor-based) studies and citizen science projects related to health, lifestyle or living environment (see [Projects](/project/)). <p> 
   
   I love to talk about my passions and share my insights with others!
   Please <i class="fas fa-envelope"></i> [contact me](/contact/) to get in touch or introduce yourself!

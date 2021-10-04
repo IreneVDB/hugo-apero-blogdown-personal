@@ -6,11 +6,14 @@ avatar_shape: circle # circle, square, rounded
 show_social_links: true 
 show_audio_link: false
 # audio_link_label: "How to say my name"
-link_list_label: "Websites"
+link_list_label: "More about me..."
 link_list:
- - name: Je Bent Wat Je Meet
+ - name: Website (in Dutch)
    url: https://www.jebentwatjemeet.nl
- - name: You R What You Measure
+ - name: Publications
+   url: https://www.ncbi.nlm.nih.gov/myncbi/irene.van%20den%20broek.1/bibliography/public/
+ - name: Wikipédia (in French)
+   url: https://fr.wikipedia.org/wiki/Irene_van_den_Broek
 
 ---
 
