@@ -1,6 +1,6 @@
 ---
 title: Data visualization projects
-description: "Data visualizations and web applications to support (sensor-based) studies and citizen science projects related to health, lifestyle or living environment"
+description: "Data visualizations and web applications that I created for citizen science or personal projects related to (measuring) health, lifestyle or living environment"
 author: "Irene van den Broek"
 show_post_thumbnail: true
 show_author_byline: false
