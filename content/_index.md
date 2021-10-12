@@ -1,7 +1,8 @@
 ---
 title: "Irene van den Broek"
 subtitle: "Data Visualization and Quantified Self Enthusiast"
-description: "I am an avid **cyclist** with a passion for **self-tracking** and **data visualization**. I work as university teacher and freelance data visualizer.  <p>
+description: "I am an avid cyclist with a passion for self-tracking and data visualization. I work as university teacher and freelance data visualizer.
+<p>
 Don't hesitate to [get in touch](contact) and introduce yourself!
 "
 
