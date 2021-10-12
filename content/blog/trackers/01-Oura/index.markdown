@@ -13,6 +13,8 @@ categories: [Sleep, Activity, Oura Ring]
 
 <script src="{{< blogdown/postref >}}index_files/panelset/panelset.js"></script>
 
+<style>body {text-align: justify}</style>
+
 ## What is the Ōura Ring?
 
 A pretty piece of jewelry on the outside with a variety of sensors hidden on the inside\! The [Ōura Ring](https://oura.com) is a **Sleep** and **Activity** tracker that measures heart and breathing rate, skin temperature, and motion. Without any effort, and with very little non-wear time, I have already collected a wealth of data over **621** days. Here, you can read all about my experiences collecting, analyzing and visualizing my Ōura Ring data\!
