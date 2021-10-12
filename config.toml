@@ -1,7 +1,7 @@
 baseURL = "https://irenevdb.rbind.io"
 theme = "hugo-apero"
 languageCode = "en"
-title = "Personal website of Irene van den Broek"
+title = "You R What You Measure"
 author = "Irene van den Broek"
 copyright = "" # set to override the auto generated copyright using org info and now year
 googleAnalytics = ""
@@ -30,7 +30,7 @@ enableEmoji = true
 [params]
   orgName = "Irene van den Broek"
   orgLocal = ""
-  description = "A personal website featuring talks, projects and blog posts about insights in Health and Habits through visualization of wearable data."
+  description = "You R What You Measure: Data Visualizations for Insights in Health and Habits"
   favicon = "/img/favicon.ico"
   logo = "/img/logo_transparent.png"
   mainSections = ["blog", "project", "talk"]

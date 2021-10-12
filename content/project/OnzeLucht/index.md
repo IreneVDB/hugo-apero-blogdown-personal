@@ -5,6 +5,9 @@ excerpt: "Onze Lucht is a citizen science project in the Netherlands where citiz
 date: 2021-07-01
 author: "Irene van den Broek"
 draft: false
+image:
+  caption: ''
+  focal_point: Smart
 tags:
   - RShiny
 categories:

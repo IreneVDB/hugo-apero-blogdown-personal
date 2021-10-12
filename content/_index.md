@@ -1,12 +1,7 @@
 ---
 title: "Irene van den Broek"
 subtitle: "Data Visualization and Quantified Self Enthusiast"
-description: "I am an avid cyclist with a passion for self-tracking and data visualization. I work as university teacher and freelance data visualizer.
-<p>
-Don't hesitate to [get in touch](contact) and introduce yourself!
-"
-
-date: 2021-09-24T12:27:33-06:00
+description: I am a freelance data visualization designer and university lecturer passionate about health, tech and teaching. You R Are What You Measure is my passion project to analyze and visualize my Health & Habits using apps, wearables and...R!"
 images:
   - img/sequoia.jpeg
 image_left: false

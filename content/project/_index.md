@@ -1,6 +1,6 @@
 ---
 title: Data visualization projects
-description: "Data visualizations and web applications that I created for citizen science or personal projects related to (measuring) health, lifestyle or living environment"
+description: "Data visualizations and web applications personal or professional projects related to (the measurement of) health, lifestyle or living environment"
 author: "Irene van den Broek"
 show_post_thumbnail: true
 show_author_byline: false
@@ -13,8 +13,6 @@ sidebar:
   title: A Sidebar for Your Projects
   description: |
     Projects can be anything!
-    Check out the _index.md file in the /project folder 
-    to edit this content.
   author: "Irene van den Broek"
   text_link_label: ""
   text_link_url: ""
