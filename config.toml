@@ -82,10 +82,6 @@ enableEmoji = true
       icon      = "linkedin-in"
       icon_pack = "fab"
       url       = "https://www.strava.com/athletes/11621716"
-  [[params.social]]
-      icon      = "link"
-      icon_pack = "fas"
-      url       = "https://www.jebentwatjemeet.nl"
    [[params.social]]
       icon      = "researchgate"
       icon_pack = "fab"
