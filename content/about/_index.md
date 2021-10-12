@@ -1,7 +1,7 @@
 ---
-title: "About"
+title: "Irene van den Broek"
 description: |
-  More about myself
+  Data Visualization and Quantified Self Enthusiast
 show_header: false
 sidebar_left: true
 # Keep this! Do not edit.
