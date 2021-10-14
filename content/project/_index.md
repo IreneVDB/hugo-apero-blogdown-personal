@@ -1,6 +1,6 @@
 ---
 title: Data visualization projects
-description: "Data visualizations and web applications personal or professional projects related to (the measurement of) health, lifestyle or living environment"
+description: "Data visualizations and web applications for personal or professional projects related to (the measurement of) health, lifestyle or living environment"
 author: "Irene van den Broek"
 show_post_thumbnail: true
 show_author_byline: false
