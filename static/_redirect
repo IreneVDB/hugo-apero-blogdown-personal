@@ -1,0 +1,3 @@
+https://irenevdb.netlify.app/*        https://irenevdb.rbind.io/:splat  301!
+http://irenevdb.netlify.app/*         https://irenevdb.rbind.io/:splat  301!
+http://irenevdb.rbind.io/*            https://irenevdb.rbind.io/:splat  301!
