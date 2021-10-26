@@ -268,6 +268,8 @@ Figure 12:  The Ōura Ring records the Activity level (**Low**, **medium** and *
 
 </div>
 
+<img src="/img/app_logos/Oura.png" width="10%" style="float:left; border-radius:10%; margin:5px;"/>
+
 ## Conclusion
 
 The Ōura Ring stands out for it’s **data accessibility** and the **ease of wearing**.
