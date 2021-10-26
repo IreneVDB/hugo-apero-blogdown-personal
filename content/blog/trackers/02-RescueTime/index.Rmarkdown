@@ -1,0 +1,124 @@
+---
+title: "Rescue Time"
+weight: 2
+subtitle: "An app to track your computer and mobile phone usage"
+excerpt: "The RescueTime app is a **productivity** tracker that you can install on your computer and mobile devices. Here, you'll read about my experiences with the RescueTime app and how you can get the most out of your data!"
+date: 2021-10-24
+draft: true
+categories: [Habits, Productivity, RescueTime]
+
+---
+
+<style>body {text-align: justify}</style>
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, 
+                      warning = FALSE,
+                      message = FALSE,
+                      fig.width = 7)
+
+library(here)
+library(pins)
+xaringanExtra::use_panelset()
+
+RescueTime <- pin_get("RescueTime")
+
+```
+
+## What is the RescueTime app?
+
+I love apps and trackers that *continuously* gather data while you don't have to do anything! The RescueTime app is such an app. You simply install the RescueTime app on your mobile phone(s), tablet(s) and/or computer(s) and the app tracks *when* and for *how long* you use the device. When installed on your laptop or desktop computer, the RescueTime app also tracks *what* you were doing and how *productive* your activity has been.
+
+This way, I have been collecting data about my productivity for already **`r length(seq(RescueTime[["pc"]]$Date[1], rev(RescueTime[["pc"]]$Date)[1], by = "day"))`**  days. On your mobile devices the app needs to be opened in the background, which means that when you accidentally close the app, it won't track! So far, I have collected data on my mobile devices for **`r length(unique(RescueTime[["mobile"]]$Date))`** days.
+
+## How to get your data?
+
+There are several ways to get your RescueTime data. The easiest way may be on your [RescueTime account](https://www.rescuetime.com), where you can find a link to "Download your data archive" under the "Your data" heading in the sidebar of the "Account Settings" page. When you click this link, you can generate a `.csv` file which lists the number of minutes for each activity per hour of the day for your entire logging history.
+
+Alternatively, you can get your data using the [RescueTime API](https://www.rescuetime.com/anapi/setup/documentation). In contrast to the data archive downloaded from your RescueTime account, the Rescue Time API does not allow you to retrieve data from more than 3 months ago unless you have a Premium account. On the other hand, the data from the RescueTime API can be summarized in chunks with a minimum size of 5 minutes and also includes **productivity metrics**.
+
+## Productivity Metrics
+
+Each activity is categorized as *Very Distracting*, *Distracting*, *Neutral*, *Productive* and *Very Productive* (Figure 1). This productivity score is, of course, a bit arbitrary as you can be very productive when visiting a webshop, whereas you can perform completely irrelevant work using a text editor. To get a better insight in your productivity, you can manually adjust the productivity metrics for every activity in your RescueTime account.
+
+RescueTime_plots[[Productivity]][["pie"]]
+Figure 1: A bar chart with the productivity metrics as relative %
+RescueTime_plots[[Productivity]][["beeswarm"]]
+Figure 2: A beeswarm with the disribution of productivity metrics as hours per day
+Figure 3: A bar chart with the productivity pe rhour of day
+
+## Computer vs. Mobile device
+
+Besides the productivity metrics, RescueTime also allows you to track *when* and for *how long* you use your computer or mobile device. It should, however, be noted that the RescueTime app on your mobile device cannot track which app or program is being used. For me, any time spent on my tablet or mobile phone is categorized as "iOS device" and assigned a **Very Distracting** productivity score.
+
+Using the RescueTime API, you can get a summary of your activity data in chunks of 5 minutes. Tthe average time spent on my laptop vs. my mobile devices across the days of the week is visualized in Figure \@ref(fig:Laptop_vs_Mobile). In addition, the heatmaps in Figure \@ref(fig:HM_screentime) and Figure \@ref(fig:HM_mobile) show the time spent on either my laptop or mobile devices across the entire logging period (`r length(seq(RescueTime[["pc"]]$Date[1], rev(RescueTime[["pc"]]$Date)[1], by = "day"))` days).
+
+```{r Laptop_vs_Mobile, echo=FALSE, fig.cap="\\label{fig:Laptop_vs_Mobile} The time spent on my laptop and mobile devices during the days of the week"}
+
+```
+
+::::: {.panelset}
+
+::: {.panel}
+
+### Screen Time {.panel-name}
+
+```{r HM_screentime, echo=FALSE, fig.cap="\\label{fig:HM_screentime} Screen time over time visualized per hour of the day (x-axis) for every tracked week (y-axis). The color intensity correlates with the minutes spent on the computer for that hour of the day."}
+
+xx
+
+```
+
+:::
+
+::: {.panel}
+
+### Mobile device use {.panel-name}
+
+```{r HM_mobile, echo=FALSE, fig.cap="\\label{fig:HM_mobile} Mobile device usage over time visualized per hour of the day (x-axis) for every tracked week (y-axis). The color intensity correlates with the minutes spent on the computer for that hour of the day. During weeks xx-xx, the RescueTime app was not running in the background and no data has been recorded."}
+
+xx
+```
+
+:::
+
+:::::
+
+## Categories
+
+All activities are categorized into 11 main categories which are further divided into ~60 sub-categories (Figure xxx). You can manually adjust the categorization in your RescueTime account, which is especially usefull for frequently used applications that would otherwise be left 'uncategorized' (and assigned a 'neutral' productivity score).
+
+Figure xxx shows the average time per day spent in the 11 top-level categories.
+
+## Activities
+
+Lastly, the RescueTime app on your desktop computer tracks the time spent on each individual application, website or activity. The Treemap in Figure xxx shows that **R Studio** is clearly my favorite application!
+
+<img src="/img/app_logos/RescueTime.png" width="10%" style="float:left; border-radius:10%; margin:5px;"/>
+
+## Conclusion
+
+The RescueTime app allows you to freely and silently gather a wealth of data about your computer and phone use. Although your RescueTime account already allows you to view your statistics and create reports in various ways, the best part of the RescueTime app - to me `r emo::ji("blush")` - is the accessibility of your own data. However, when using the RescueTime API, you need to make sure to download and store your data at least every 3 months.
+
+If you want to improve your productivity, the RescueTime app offers various tools to, for example, set goals or time limits, or even block certain (distracting) applications or websites. A Premium subscription offers even more tools to potentially enhance your productivity, but comes at a monthly cost of \$12 (or $78 annually) which, for me, is not worth the merits.
+
+### RescueTime - Pros:
+
+- Data about computer and mobile device usage are continously tracked.
+- All data is (freely) accessible without need for Premium subscription.
+- You can install the RescueTime app on multiple computers as well as your mobile phone(s) or tablet(s).
+- You can automate your data collection using the (well-documented) RescueTime API.
+- You can analyze and visualize various activity and productivity metrics, and generate reports, on your RescueTime account.
+
+### RescueTime - Cons:
+
+- The mobile RescueTime app only tracks time and does not log applications or activities.
+- When your mobile device(s) have the same OS you won't be able to differatiate between the time on each device as all activities are categorized as, for example, "iOS device".
+- For accurate use of the automatically assigned productivity metrics, a manual check or adjustment is needed.
+- Without the Premium account the RescueTime API only allows access to data from the last 3 months.
+
+## Resources
+
+- `r fontawesome::fa("github")` Code to collect, analyze and visualize my RescueTime data on [Github](https://github.com/IreneVDB/RescueTime)
+- RescueTime [website](https://www.rescuetime.com)
+- RescueTime [API documentation](https://www.rescuetime.com/anapi/setup/documentation)
