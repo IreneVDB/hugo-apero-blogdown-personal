@@ -9,6 +9,10 @@ categories: [Habits, Productivity, RescueTime]
 
 ---
 
+<link href="{{< blogdown/postref >}}index_files/panelset/panelset.css" rel="stylesheet" />
+
+<script src="{{< blogdown/postref >}}index_files/panelset/panelset.js"></script>
+
 <style>body {text-align: justify}</style>
 
 ## What is the RescueTime app?
@@ -21,23 +25,117 @@ This way, I have been collecting data about my productivity for already **460** 
 
 There are several ways to get your RescueTime data. The easiest way may be on your [RescueTime account](https://www.rescuetime.com), where you can find a link to “Download your data archive” under the “Your data” heading in the sidebar of the “Account Settings” page. When you click this link, you can generate a `.csv` file which lists the number of minutes for each activity per hour of the day for your entire logging history.
 
-Alternatively, you can get your data using the [RescueTime API](https://www.rescuetime.com/anapi/setup/documentation). In contrast to the data archive downloaded from your RescueTime account, the Rescue Time API, unfortunately, does not allow you to retrieve data from more than 3 months ago if you don’t have a Premium account. On the other hand, the data from the RescueTime API can be summarized in chunks with a minimum size of 5 minutes and also includes **productivity metrics**.
+Alternatively, you can get your data using the [RescueTime API](https://www.rescuetime.com/anapi/setup/documentation). In contrast to the data archive downloaded from your RescueTime account, the Rescue Time API does not allow you to retrieve data from more than 3 months ago unless you have a Premium account. On the other hand, the data from the RescueTime API can be summarized in chunks with a minimum size of 5 minutes and also includes **productivity metrics**.
 
 ## Productivity Metrics
 
-The productivity metrics are assigned as to each activity and categorized as *Very Distracting*, *Distracting*, *Neutral*, *Productive* and *"Very Productive* (Figure 1). The productivity score is of course a bit arbitrary as you can be very productive when visiting a webshop, whereas you can perform completely irrelevant work using a text editor. To get a better insight in your productivity, you can manually adjust the productivity metrics for every activity in your RescueTime account.
+Each activity is categorized as *Very Distracting*, *Distracting*, *Neutral*, *Productive* and *Very Productive* (Figure <a href="#fig:ProdPulse">1</a>). This productivity score is, of course, a bit arbitrary as you can be very productive when visiting a webshop, whereas you can perform completely irrelevant work using a text editor, for example. To get a better insight in your productivity, you have the ability to manually adjust the productivity metrics of an activity in your RescueTime account.
 
-RescueTime\_plots\[\[Productivity\]\]\[\[“pie”\]\]
-Figure 1: A bar chart with the productivity metrics as relative %
-RescueTime\_plots\[\[Productivity\]\]\[\[“beeswarm”\]\]
-Figure 2: A beeswarm with the disribution of productivity metrics as hours per day
-Figure 3: A bar chart with the productivity pe rhour of day
+### Average and Daily Productivity Pulse
+
+Luckily, most of my time is spent (very) productive 😊. On average, I spent 184 minutes *very productive* and 84 minutes *productive* per day (Figure <a href="#fig:ProdPulse">1</a> and Figure <a href="#fig:ProdBeeswarm">2</a>).
+
+<div class="panelset">
+
+<div class="panel">
+
+### Mean productivity pulse
+
+<div class="figure">
+
+<img src="{{< blogdown/postref >}}index_files/figure-html/ProdPulse-1.png" alt="\label{fig:ProdPulse} The average distribution of productivity metrics tracked with the Rescue Time app." width="720" />
+
+<p class="caption">
+
+Figure 1:  The average distribution of productivity metrics tracked with the Rescue Time app.
+
+</p>
+
+</div>
+
+</div>
+
+<div class="panel">
+
+### Daily productivity pulse
+
+<div class="figure">
+
+<img src="{{< blogdown/postref >}}index_files/figure-html/ProdBeeswarm-1.png" alt="\label{fig:ProdBeeswarm} Distribution of daily productivity metrics, including days without computere use." width="720" />
+
+<p class="caption">
+
+Figure 2:  Distribution of daily productivity metrics, including days without computere use.
+
+</p>
+
+</div>
+
+</div>
+
+</div>
+
+### Productivity per Weekday or Hour
+
+Plotting the productivity pulse per day of the week, you can see that Monday, Wednesday and Friday are my *most productive* days (Figure <a href="#fig:ProdWeekly">3</a>). When looking at the average productivity pulse during the day (Figure <a href="#fig:ProdHourly">4</a>), you see that on a typical day, I am most productive between 9 to 12 in the morning with another productivity burst between 3 and 6 in the afternoon.
+
+<div class="panelset">
+
+<div class="panel">
+
+### Productivity per weekday
+
+<div class="figure">
+
+<img src="{{< blogdown/postref >}}index_files/figure-html/ProdWeekly-1.png" alt="\label{fig:ProdWeekly} The average productivity pulse on the different days in the week." width="720" />
+
+<p class="caption">
+
+Figure 3:  The average productivity pulse on the different days in the week.
+
+</p>
+
+</div>
+
+</div>
+
+<div class="panel">
+
+### Productivity per hour
+
+<div class="figure">
+
+<img src="{{< blogdown/postref >}}index_files/figure-html/ProdHourly-1.png" alt="\label{fig:ProdHourly} The average productivity pulse throughout the day." width="720" />
+
+<p class="caption">
+
+Figure 4:  The average productivity pulse throughout the day.
+
+</p>
+
+</div>
+
+</div>
+
+</div>
 
 ## Computer vs. Mobile device
 
-Besides the productivity metrics, RescueTime also allows you to track *when* and for *how long* you use your computer or mobile device(s). It should, however, be noted that the RescueTime app on your mobile device cannot track which app or program is being used. For me, any time spent on my tablet or mobile phone is categorized as “iOS device” and assigned a **Very Distracing** productivity score.
+Besides the productivity metrics, RescueTime also allows you to track *when* and for *how long* you use your computer or mobile device. It should, however, be noted that the RescueTime app on your mobile device cannot track which app or program is being used. For me, any time spent on my tablet or mobile phone is categorized as “iOS device” and assigned a **Very Distracting** productivity score.
 
-Using the RescueTime API, you can get a summary of your activity data in chunks of 5 minutes. With this data, I visualized the average time spent on my laptop vs. my mobile devices across the days of the week (@ref(fig:Laptop\_vs\_Mobile)). In addition, the heatmaps in Figure @ref(fig:HM\_screentime) and Figure @ref(fig:HM\_mobile) show the time spent on either my laptop or mobile devices across the entire logging period (460 days).
+Using the RescueTime API, you can get a summary of your activity data in chunks of 5 minutes. Tthe average time spent on my laptop vs. my mobile devices across the days of the week is visualized in Figure <a href="#fig:LaptopMobile">5</a>. In addition, the heatmaps in Figure <a href="#fig:HMscreentime"><strong>??</strong></a> and Figure <a href="#fig:HMmobile"><strong>??</strong></a> show the time spent on either my laptop or mobile devices across the entire logging period (460 days).
+
+<div class="figure">
+
+<img src="{{< blogdown/postref >}}index_files/figure-html/LaptopMobile-1.png" alt="\label{fig:LaptopMobile} The time spent on my laptop and mobile devices during the days of the week" width="720" />
+
+<p class="caption">
+
+Figure 5:  The time spent on my laptop and mobile devices during the days of the week
+
+</p>
+
+</div>
 
 <div class="panelset">
 
@@ -49,7 +147,7 @@ Using the RescueTime API, you can get a summary of your activity data in chunks 
 
 <div class="panel">
 
-### Mobile device usage
+### Mobile device use
 
 </div>
 
@@ -57,33 +155,33 @@ Using the RescueTime API, you can get a summary of your activity data in chunks 
 
 ## Categories
 
-All activities are categorized into 11 main categories which are further divided into \~60 sub-categories (Figure xxx). You can manually adjust the categorization in your RescueTime account, which is especially usefull for frequently used applications that would otherwise be left ‘uncategorized’ (and assigned a ‘neutral’ productivity score).
+All activities are categorized into 11 main categories which are further divided into \~60 sub-categories (Figure xxx). You can manually adjust the categorization in your RescueTime account, which is especially useful for frequently used, uncategorized applications that would otherwise be assigned a ‘neutral’ productivity score.
 
 Figure xxx shows the average time per day spent in the 11 top-level categories.
 
 ## Activities
 
-Lastly, the RescueTime app on your desktop computer tracks the time spent on each individual application, website or activity. The Treemap in Figure xxx shows that **R Studio** is clearly my favorite application\!
+Moreoever, the RescueTime app on your desktop computer tracks the time spent on each individual application, website or activity. The Treemap in Figure xxx shows that **R Studio** is clearly my favorite application\!
 
 <img src="/img/app_logos/RescueTime.png" width="10%" style="float:left; border-radius:10%; margin:5px;"/>
 
 ## Conclusion
 
-The RescueTime app allows you to freely and silently gather a wealth of data about your computer and phone use. Although your RescueTime account already allows you to view your statistics and create reports in various ways, the best part of the RescueTime app - to me 😄 - is the accessibility of your own data. However, when using the (well-documented) RescueTime API, you need to make sure to download and store your data at least every 3 months.
+The RescueTime app allows you to freely and silently gather a wealth of data about your computer and phone use. Although your RescueTime account already allows you to view your statistics and create reports in various ways, the best part of the RescueTime app - to me 😊 - is the accessibility of your own data. However, when using the RescueTime API, you need to make sure to download and store your data at least every 3 months.
 
 If you want to improve your productivity, the RescueTime app offers various tools to, for example, set goals or time limits, or even block certain (distracting) applications or websites. A Premium subscription offers even more tools to potentially enhance your productivity, but comes at a monthly cost of $12 (or $78 annually) which, for me, is not worth the merits.
 
 ### RescueTime - Pros:
 
-  - Data about computer and mobile device usage are continuously being monitored
-  - All data is (freely) accesible without need for Premium subscription.
+  - Data about computer and mobile device usage are continously tracked.
+  - All data is (freely) accessible without need for Premium subscription.
   - You can install the RescueTime app on multiple computers as well as your mobile phone(s) or tablet(s).
   - You can automate your data collection using the (well-documented) RescueTime API.
   - You can analyze and visualize various activity and productivity metrics, and generate reports, on your RescueTime account.
 
 ### RescueTime - Cons:
 
-  - The mobile RescueTime app only tracks time and does not log which programs are used.
+  - The mobile RescueTime app only tracks time and does not log applications or activities.
   - When your mobile device(s) have the same OS you won’t be able to differatiate between the time on each device as all activities are categorized as, for example, “iOS device”.
   - For accurate use of the automatically assigned productivity metrics, a manual check or adjustment is needed.
   - Without the Premium account the RescueTime API only allows access to data from the last 3 months.

@@ -15,13 +15,78 @@ categories: [Habits, Productivity, RescueTime]
 knitr::opts_chunk$set(echo = TRUE, 
                       warning = FALSE,
                       message = FALSE,
-                      fig.width = 7)
+                      fig.width = 7.5)
+#figure width:
+w <- 7.5
 
 library(here)
 library(pins)
+library(tidyverse)
+library(grid)
+library(ggtext)
+library(png)
 xaringanExtra::use_panelset()
 
 RescueTime <- pin_get("RescueTime")
+RT_plots <- pin_get("RT_plots")
+
+ndays <- length(seq(RescueTime[["pc"]]$Date[1], 
+                    rev(RescueTime[["pc"]]$Date)[1], by = "day"))
+
+# function to get exact height of beeswarm plots:
+plot_height_single_beeswarm <- function(p, plot_width, unit){
+  gt <-  ggplotGrob(p)
+  panel <- gt$layout[which(gt$layout$name == "panel"), ]
+  aspect.ratio <- p[["theme"]][["aspect.ratio"]]
+  
+  space_v <- sum(convertUnit(gt$heights[-panel$t], unit, valueOnly=TRUE))
+  space_h <- sum(convertUnit(gt$widths[-panel$l], unit, valueOnly=TRUE))
+  
+  panel_width <- plot_width - space_h
+  panel_height <- panel_width * aspect.ratio
+  
+  plot_height <- panel_height + space_v
+}
+
+# function to add label to plot:
+add.logo <- function(p, img, plot_w_cm = NA, plot_h_cm = NA, logo_w_mm = 10){
+  
+  if(is.na(plot_w_cm)){
+    plot_w_cm <- dev.size("cm")[1]
+  }
+  if(is.na(plot_h_cm)){
+    plot_h_cm <- dev.size("cm")[2]
+  }
+  
+  gt <- ggplotGrob(p)
+  gb <- ggplot_build(p)
+  
+  panel_pos <- gt$layout[which(gt$layout$name == "panel"), ]
+  space_y <- sum(convertUnit(gt$heights[-panel_pos$t], "mm", valueOnly=TRUE))
+  space_x <- sum(convertUnit(gt$widths[-panel_pos$l], "mm", valueOnly=TRUE))
+  from_top <- sum(convertUnit(gt$heights[seq(panel_pos$t - 1)], "mm", valueOnly=TRUE))
+  from_right <- sum(convertUnit(gt$widths[-seq(panel_pos$l)], "mm", valueOnly=TRUE))
+  
+  panel_w <- 10 * plot_w_cm - space_x
+  
+  if(!is.null(gb$plot$theme$aspect.ratio)){
+    panel_h <- gb$plot$theme$aspect.ratio * panel_w
+  } else{
+    panel_h <- 10 * plot_h_cm - space_y
+  }
+  
+  top_mar <- convertUnit(gb$plot$theme$plot.margin[1], "mm", valueOnly=TRUE)
+  right_mar <- convertUnit(gb$plot$theme$plot.margin[2], "mm", valueOnly=TRUE)
+  
+  logo <- rasterGrob(readPNG(img), 
+                     x = unit(panel_w + from_right - top_mar, "mm"), 
+                     y = unit(panel_h + from_top - top_mar, "mm"), 
+                     width = unit(logo_w_mm, "mm"),
+                     hjust = 1, vjust=1,
+                     interpolate=TRUE)
+  
+  p + annotation_custom(logo) 
+}
 
 ```
 
@@ -29,7 +94,7 @@ RescueTime <- pin_get("RescueTime")
 
 I love apps and trackers that *continuously* gather data while you don't have to do anything! The RescueTime app is such an app. You simply install the RescueTime app on your mobile phone(s), tablet(s) and/or computer(s) and the app tracks *when* and for *how long* you use the device. When installed on your laptop or desktop computer, the RescueTime app also tracks *what* you were doing and how *productive* your activity has been.
 
-This way, I have been collecting data about my productivity for already **`r length(seq(RescueTime[["pc"]]$Date[1], rev(RescueTime[["pc"]]$Date)[1], by = "day"))`**  days. On your mobile devices the app needs to be opened in the background, which means that when you accidentally close the app, it won't track! So far, I have collected data on my mobile devices for **`r length(unique(RescueTime[["mobile"]]$Date))`** days.
+This way, I have been collecting data about my productivity for already **`r ndays`**  days. On your mobile devices the app needs to be opened in the background, which means that when you accidentally close the app, it won't track! So far, I have collected data on my mobile devices for **`r length(unique(RescueTime[["mobile"]]$Date))`** days.
 
 ## How to get your data?
 
@@ -39,21 +104,87 @@ Alternatively, you can get your data using the [RescueTime API](https://www.resc
 
 ## Productivity Metrics
 
-Each activity is categorized as *Very Distracting*, *Distracting*, *Neutral*, *Productive* and *Very Productive* (Figure 1). This productivity score is, of course, a bit arbitrary as you can be very productive when visiting a webshop, whereas you can perform completely irrelevant work using a text editor. To get a better insight in your productivity, you can manually adjust the productivity metrics for every activity in your RescueTime account.
+Each activity is categorized as *Very Distracting*, *Distracting*, *Neutral*, *Productive* and *Very Productive* (Figure  \@ref(fig:ProdPulse)). This productivity score is, of course, a bit arbitrary as you can be very productive when visiting a webshop, whereas you can perform completely irrelevant work using a text editor, for example. To get a better insight in your productivity, you have the ability to manually adjust the productivity metrics of an activity in your RescueTime account.
 
-RescueTime_plots[[Productivity]][["pie"]]
-Figure 1: A bar chart with the productivity metrics as relative %
-RescueTime_plots[[Productivity]][["beeswarm"]]
-Figure 2: A beeswarm with the disribution of productivity metrics as hours per day
-Figure 3: A bar chart with the productivity pe rhour of day
+### Average and Daily Productivity Pulse
+
+Luckily, most of my time is spent (very) productive `r emo::ji("blush")`. On average, I spent `r round(sum(subset(RescueTime[["day"]], Productivity == "Very Productive")$Time) / ndays / 60)` minutes *very productive* and `r round(sum(subset(RescueTime[["day"]], Productivity == "Productive")$Time) / ndays / 60)` minutes *productive* per day (Figure  \@ref(fig:ProdPulse) and Figure  \@ref(fig:ProdBeeswarm)).
+
+```{r h_beeswarm, echo=FALSE}
+h_ProdBeeswarm <- plot_height_single_beeswarm(RT_plots[["Prod_beeswarm"]], w, "in")
+```
+
+::::: {.panelset}
+
+::: {.panel}
+
+### Mean productivity pulse {.panel-name}
+
+```{r ProdPulse, echo=FALSE, fig.width = w, fig.height = h_ProdBeeswarm, fig.cap="\\label{fig:ProdPulse} The average distribution of productivity metrics tracked with the Rescue Time app."}
+RT_plots[["Prod_pulse"]] %>%
+  add.logo(., img = here("static", "img", "app_logos", "RescueTime.png"), plot_w_cm = w * 2.54, plot_h_cm = h_ProdBeeswarm * 2.54)
+```
+
+:::
+
+::: {.panel}
+
+### Daily productivity pulse {.panel-name}
+
+```{r ProdBeeswarm, echo=FALSE, fig.width = w, fig.height = h_ProdBeeswarm, fig.cap="\\label{fig:ProdBeeswarm} Distribution of daily productivity metrics, including days without computere use."}
+RT_plots[["Prod_beeswarm"]] %>%
+  add.logo(., img = here("static", "img", "app_logos", "RescueTime.png"), plot_w_cm = w * 2.54, plot_h_cm = h_ProdBeeswarm * 2.54)
+```
+
+:::
+
+:::::
+
+### Productivity per Weekday or Hour
+
+Plotting the productivity pulse per day of the week, you can see that Monday, Wednesday and Friday are my *most productive* days (Figure  \@ref(fig:ProdWeekly)). When looking at the average productivity pulse during the day (Figure  \@ref(fig:ProdHourly)), you see that on a typical day, I am most productive between 9 to 12 in the morning with another productivity burst between 3 and 6 in the afternoon.
+
+::::: {.panelset}
+
+::: {.panel}
+
+### Productivity per weekday {.panel-name}
+
+```{r ProdWeekly, echo=FALSE, fig.cap="\\label{fig:ProdWeekly} The average productivity pulse on the different days in the week."}
+
+RT_plots[["Prod_Weekly"]]  %>%
+  add.logo(., img = here("static", "img", "app_logos", "RescueTime.png"), plot_w_cm = w * 2.54, plot_h_cm = 5 * 2.54)
+
+```
+
+:::
+
+::: {.panel}
+
+### Productivity per hour {.panel-name}
+
+```{r ProdHourly, echo=FALSE, fig.cap="\\label{fig:ProdHourly} The average productivity pulse throughout the day."}
+
+RT_plots[["Prod_Hourly"]]  %>%
+  add.logo(., img = here("static", "img", "app_logos", "RescueTime.png"), plot_w_cm = w * 2.54, plot_h_cm = 5 * 2.54)
+
+```
+
+:::
+
+:::::
+
 
 ## Computer vs. Mobile device
 
 Besides the productivity metrics, RescueTime also allows you to track *when* and for *how long* you use your computer or mobile device. It should, however, be noted that the RescueTime app on your mobile device cannot track which app or program is being used. For me, any time spent on my tablet or mobile phone is categorized as "iOS device" and assigned a **Very Distracting** productivity score.
 
-Using the RescueTime API, you can get a summary of your activity data in chunks of 5 minutes. Tthe average time spent on my laptop vs. my mobile devices across the days of the week is visualized in Figure \@ref(fig:Laptop_vs_Mobile). In addition, the heatmaps in Figure \@ref(fig:HM_screentime) and Figure \@ref(fig:HM_mobile) show the time spent on either my laptop or mobile devices across the entire logging period (`r length(seq(RescueTime[["pc"]]$Date[1], rev(RescueTime[["pc"]]$Date)[1], by = "day"))` days).
+Using the RescueTime API, you can get a summary of your activity data in chunks of 5 minutes. Tthe average time spent on my laptop vs. my mobile devices across the days of the week is visualized in Figure \@ref(fig:LaptopMobile). In addition, the heatmaps in Figure \@ref(fig:HMscreentime) and Figure \@ref(fig:HMmobile) show the time spent on either my laptop or mobile devices across the entire logging period (`r ndays` days).
 
-```{r Laptop_vs_Mobile, echo=FALSE, fig.cap="\\label{fig:Laptop_vs_Mobile} The time spent on my laptop and mobile devices during the days of the week"}
+```{r LaptopMobile, echo=FALSE, fig.height = 7,  fig.cap="\\label{fig:LaptopMobile} The time spent on my laptop and mobile devices during the days of the week."}
+
+RT_plots[["LaptopMobile"]] %>%
+  add.logo(., img = here("static", "img", "app_logos", "RescueTime.png"), plot_w_cm = w * 2.54, plot_h_cm = 7 * 2.54)
 
 ```
 
@@ -63,9 +194,8 @@ Using the RescueTime API, you can get a summary of your activity data in chunks 
 
 ### Screen Time {.panel-name}
 
-```{r HM_screentime, echo=FALSE, fig.cap="\\label{fig:HM_screentime} Screen time over time visualized per hour of the day (x-axis) for every tracked week (y-axis). The color intensity correlates with the minutes spent on the computer for that hour of the day."}
+```{r HMscreentime, echo=FALSE, fig.cap="\\label{fig:HMscreentime} Screen time over time visualized per hour of the day (x-axis) for every tracked week (y-axis). The color intensity correlates with the minutes spent on the computer for that hour of the day."}
 
-xx
 
 ```
 
@@ -75,9 +205,8 @@ xx
 
 ### Mobile device use {.panel-name}
 
-```{r HM_mobile, echo=FALSE, fig.cap="\\label{fig:HM_mobile} Mobile device usage over time visualized per hour of the day (x-axis) for every tracked week (y-axis). The color intensity correlates with the minutes spent on the computer for that hour of the day. During weeks xx-xx, the RescueTime app was not running in the background and no data has been recorded."}
+```{r HMmobile, echo=FALSE, fig.cap="\\label{fig:HMmobile} Mobile device usage over time visualized per hour of the day (x-axis) for every tracked week (y-axis). The color intensity correlates with the minutes spent on the computer for that hour of the day. During weeks xx-xx, the RescueTime app was not running in the background and no data has been recorded."}
 
-xx
 ```
 
 :::
@@ -86,13 +215,13 @@ xx
 
 ## Categories
 
-All activities are categorized into 11 main categories which are further divided into ~60 sub-categories (Figure xxx). You can manually adjust the categorization in your RescueTime account, which is especially usefull for frequently used applications that would otherwise be left 'uncategorized' (and assigned a 'neutral' productivity score).
+All activities are categorized into 11 main categories which are further divided into ~60 sub-categories (Figure xxx). You can manually adjust the categorization in your RescueTime account, which is especially useful for frequently used, uncategorized applications that would otherwise be assigned a 'neutral' productivity score.
 
 Figure xxx shows the average time per day spent in the 11 top-level categories.
 
 ## Activities
 
-Lastly, the RescueTime app on your desktop computer tracks the time spent on each individual application, website or activity. The Treemap in Figure xxx shows that **R Studio** is clearly my favorite application!
+Moreoever, the RescueTime app on your desktop computer tracks the time spent on each individual application, website or activity. The Treemap in Figure xxx shows that **R Studio** is clearly my favorite application!
 
 <img src="/img/app_logos/RescueTime.png" width="10%" style="float:left; border-radius:10%; margin:5px;"/>
 
