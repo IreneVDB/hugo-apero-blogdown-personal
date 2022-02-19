@@ -67,7 +67,6 @@ sidebar:
     <img src="/img/app_logos/RescueTime.png" width="10%" style="border-radius:10%; margin:5px;"/>
     <img src="/img/app_logos/Goodreads.png" width="10%" style="border-radius:10%; margin:5px;"/>
     <img src="/img/app_logos/Moment.png" width="10%" style="border-radius:10%; margin:5px;"/>
- <br>
  
   author: ""
   text_link_label: ""
