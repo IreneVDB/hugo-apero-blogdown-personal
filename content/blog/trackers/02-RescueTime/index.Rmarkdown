@@ -273,7 +273,7 @@ make.reactable <- function(Overview, Category, Activity,
                                                             map(Overview$daily_Productive, ~round(magrittr::extract(rev(.), 30:1)))[[index]]),
                                              type = "bar",
                                              height = 40,
-                                             width = paste0(colwidth_spark, "px"),
+                                             width = colwidth_spark,
                                              stackedBarColor = bar_col,
                                              tooltipFormatter = JS(
                                                sprintf(
