@@ -16,7 +16,7 @@ sidebar:
   description: |
     A series of posts reviewing tools for tracking health & habits, including **descriptions**, **reviews**, and extensive **how-to** on data collection, analysis and visualization. 
     
-  text_link_label: "xxx"
+  text_link_label: ""
   text_link_url: ""
   show_sidebar_adunit: false # show ad container
 
