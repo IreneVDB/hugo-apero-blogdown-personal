@@ -601,7 +601,7 @@ make.reactable <- function(Overview, Category, Activity,
                               values = Act$daily_Productive[[index]] - Act$daily_Distracting[[index]],
                               type = "bar",
                               height = 40,
-                              width = paste0(colwidth_spark, "px"),
+                              width = colwidth_spark - 15,
                               barColor = 	bar_col[2],
                               negBarColor	= bar_col[1],
                               tooltipFormatter = JS(
