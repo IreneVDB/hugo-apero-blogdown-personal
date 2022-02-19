@@ -15,6 +15,7 @@ sidebar:
   description: |
     Posts about tracking, analyzing and visualizing **Health** & **Habits**.
     <p> <br> <br>
+    Apps, sensors and wearables for tracking Sleep, Activity, Food, Mood, Brain, Body, Environment and Habits
     <i class="fas fa-bed"></i> SLEEP: <br>
     
     <img src="/img/app_logos/Oura.png" width="10%" style="border-radius:10%; margin:5px;"/> 
