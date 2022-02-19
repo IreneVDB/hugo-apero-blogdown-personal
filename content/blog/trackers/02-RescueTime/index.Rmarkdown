@@ -3,8 +3,8 @@ title: "Rescue Time"
 weight: 2
 subtitle: "An app to track your computer and mobile phone usage"
 excerpt: "The RescueTime app is a **productivity** tracker that you can install on your computer and mobile devices. Here, you'll read about my experiences with the RescueTime app and how you can get the most out of your data!"
-date: 2022-02-15
-draft: true
+date: 2022-02-19
+draft: false
 categories: [Habits, Productivity, RescueTime]
 
 ---
@@ -15,7 +15,7 @@ categories: [Habits, Productivity, RescueTime]
 knitr::opts_chunk$set(echo = TRUE, 
                       warning = FALSE,
                       message = FALSE,
-                      fig.width = 7.5)
+                      fig.width = 8)
 #figure width:
 w <- knitr::opts_chunk$get("fig.width")
 
@@ -26,14 +26,16 @@ library(grid)
 library(ggtext)
 library(png)
 library(lubridate)
+library(htmltools)
+library(reactable)
+library(sparkline)
+library(icons) 
+library(htmlwidgets)
 
 xaringanExtra::use_panelset()
 ```
 
 ```{r load_data, include=FALSE}
-# need to work on an automated procedure to update the RescueTime Data, Plots and Reactable
-# then in this blog simply 'display' the items
-
 RescueTime <- pin_get("RescueTime")
 RT_plots <- pin_get("RT_plots")
 
@@ -107,7 +109,7 @@ add.logo <- function(p, img, plot_w_cm = NA, plot_h_cm = NA, logo_w_mm = 10){
 
 I love apps and trackers that *continuously* gather data while you don't have to do anything! The RescueTime app is such an app. You simply install the RescueTime app on your mobile phone(s), tablet(s) and/or computer(s) and the app tracks *when* and for *how long* you use the device. When installed on your laptop or desktop computer, the RescueTime app also tracks *what* you were doing and how *productive* your activity has been.
 
-This way, I have been collecting data about my productivity for already **`r ndays`**  days. On your mobile devices the app needs to be opened in the background, which means that when you accidentally close the app, it won't track! So far, I have collected data on my mobile devices for **`r ndays_mobile`** days.
+This way, I have collected data about my productivity for already **`r ndays`**  days. On your mobile devices the app needs to be opened in the background, which means that when you accidentally close the app, it won't track! So far, I have collected data on my mobile devices for **`r ndays_mobile`** days.
 
 ## How to get your data?
 
@@ -196,7 +198,7 @@ RT_plots[["Prod_Hourly"]]  %>%
 
 Besides the productivity metrics, RescueTime also allows you to track *when* and for *how long* you use your computer or mobile device. It should, however, be noted that the RescueTime app on your mobile device cannot track which app or program is being used. For me, any time spent on my tablet or mobile phone is categorized as "iOS device" and assigned a **Very Distracting** productivity score.
 
-Using the RescueTime API, you can get a summary of your activity data in chunks of 5 minutes. Tthe average time spent on my laptop vs. my mobile devices across the days of the week is visualized in Figure \@ref(fig:LaptopMobile). In addition, the heatmaps in Figure \@ref(fig:HMscreentime) and Figure \@ref(fig:HMmobile) show the time spent on either my laptop or mobile devices across the entire logging period (`r ndays` and `r ndays_mobile` days, respectively).
+Using the RescueTime API, you can get a summary of your activity data in chunks of 5 minutes. The average time spent on my laptop vs. my mobile devices across the days of the week is visualized in Figure \@ref(fig:LaptopMobile). 
 
 ```{r LaptopMobile, echo=FALSE, fig.height = 7,  fig.cap="\\label{fig:LaptopMobile} The time spent on my laptop and mobile devices during the days of the week."}
 
@@ -206,230 +208,217 @@ RT_plots[["LaptopMobile"]] %>%
 
 ```
 
-::::: {.panelset}
+## Main categories
 
-::: {.panel}
+The activities tracked on your desktop computer or laptop are divided into 11 main categories: Software development, Design & composition, Communication & scheduling, Utilities, Reference & learning, Uncategorized, Business, Social networking, Shopping, News & opinion, and Entertainment. Figure \@ref(fig:Donuts) shows the average time per day spent in these 11 categories as well as the daily time spent on the mobile device.
 
-### Screen Time {.panel-name}
+```{r Donuts, echo = FALSE, fig.width = w, fig.height = w * 3/4 + (3 + 1.5 + 1.8) / 2.54, fig.cap="\\label{fig:Donuts} Average time spend per day on the 12 main categories."}
 
-```{r HMscreentime, echo=FALSE, fig.cap="\\label{fig:HMscreentime} Screen time over time visualized per hour of the day (x-axis) for every tracked week (y-axis). The color intensity correlates with the minutes spent on the computer for that hour of the day."}
-
-
-```
-
-:::
-
-::: {.panel}
-
-### Mobile device use {.panel-name}
-
-```{r HMmobile, echo = FALSE, fig.cap="\\label{fig:HMmobile} Mobile device usage over time visualized per hour of the day (x-axis) for every tracked week (y-axis). The color intensity correlates with the minutes spent on the computer for that hour of the day. During weeks xx-xx, the RescueTime app was not running in the background and no data has been recorded."}
+RT_plots[["donut"]](img_path = here("static", "img", "Trackers", "RescueTime", "Categories"))
 
 ```
 
-:::
+## Categories and Activities
 
-:::::
+You can manually adjust the categorization in your RescueTime account, which is especially useful for frequently used, uncategorized applications that would otherwise be assigned a 'neutral' productivity score. Moreoever, the RescueTime app on your desktop computer tracks the time spent on each individual application, website or activity. I used the `r emo::ji("package")` `{reactable}` to create the below `reactable` that summarizes the mean time per day spent on various programs and websites, categorized into the 11 main categories and 64 sub-categories.
 
-## Top-level Categories
-
-The activities tracked on your desktop computer or laptop are divided into 11 main categories. Figure \@ref(fig:Overview) shows the average time per day spent in these 11 categories as well as the daily time spent on the mobile device.
-
-```{r Overview, echo = FALSE, fig.width = w, fig.height = w * 3/4 + (3 + 1.5 + 1.8) / 2.54, fig.cap="\\label{fig:Overview} All categories"}
-
-RT.overview <- function(plot_h = NA){
-  all_dates <- seq(RescueTime[["day"]]$Date[1], 
-                   rev(RescueTime[["day"]]$Date)[1], by = "day")
+```{r reactable, include=FALSE}
+make.reactable <- function(Overview, Category, Activity,
+                           img_path_Overview = "img/Categories",
+                           img_path_Activity = "img/Programs",
+                           fontsize_Act = 14,
+                           padding_Cat = 16,
+                           colwidth_spark = 135,
+                           time_limit, recolor){
   
-  Category <- RescueTime[["day"]] %>%
-    group_by(Overview, Productivity) %>%
-    summarise(Time_min = sum(Time_sec) / length(all_dates) / 60) %>%
-    mutate(TotTime = sum(Time_min))
-  # adjust so that for mobile device not divided by all_dates but by 'tracked days'
-  nhours <- length(all_dates) * sum(Category$Time_min) / 60
+  Productivity_col <- rgb(red = c(13, 65, 177, 218, 212, 160),
+                          green = c(88, 130, 193, 105, 28, 235),
+                          blue = c(193, 221, 191, 93, 21, 142),
+                          names = c("Very Productive", "Productive", "Neutral", 
+                                    "Distracting", "Very Distracting", "Mobile Phone"),
+                          maxColorValue = 255)
   
-  make.donut <- function(df, category){
-    
-    subset <- df %>%
-      filter(Overview == category) %>%
-      mutate(fraction = Time_min / sum(Time_min))
-    
-    par(mar = c(2, 0, 0, 0), xaxs = "i", yaxs = "i")
-    
-    pie(subset$fraction, clockwise = TRUE, 
-        col = Productivity_col[-6][unique(as.character(subset$Productivity))], 
-        border = "white",labels = NA, xlim = c(-0.7, 0.7), ylim = c(-0.7, 0.7))
-    symbols(0,0, circles = 0.35, fg = "white", bg = "white", 
-            add = TRUE, inches = FALSE)
-    text(0, -0.9, labels = category, font = 2, col = "grey20",
-         cex = 1, adj=c(0.5, 1), xpd = TRUE)
-    text(0, -1, paste0("\n(", round(unique(subset$TotTime)), " min/day)"), 
-         col = "grey20", cex = 1, adj=c(0.5, 1), xpd = TRUE)
-  }
+  icon_col <- c("#e5eeff", "#a6c4ff", "#251a66")
   
-  if(is.na(plot_h)){
-    plot_h <- dev.size("cm")[2]
+  # Define columns for Overview, Category, Activity ----
+  set.columns <- function(reactable_df,
+                          colwidth_name = 260, 
+                          colwidth_pulse = 200,
+                          colwidth_donut = 48,
+                          col_height = 52){
+    
+    columns <- list(
+      Overview = colDef(name = "Main Category",
+                        width = colwidth_name, 
+                        style = list(height = col_height),
+                        cell = function(value){
+                          img_src <- knitr::image_uri(paste0(img_path_Overview, "/",
+                                                             gsub(" .*$", "", value), ".png"))
+                          image <- img(src = img_src, width = "48px", alt = value)
+                          div(style = list(display = "flex", alignItems = "center"),
+                              image,
+                              div(style = list(marginLeft = "8px"), value))
+                        }),
+      Pulse_rel = colDef(name = "Average Time per Day",
+                         width = colwidth_pulse,
+                         cell = function(value, index) {
+                           stacked_bar(df = Overview, 
+                                       list_of_values = value,
+                                       row = index, height = "40px")
+                         }),
+      daily_Distracting = colDef(name = "Last 30 days",
+                                 width = colwidth_spark,
+                                 cell = function(value, index) {
+                                   sparkline(values = cbind(-map(Overview$daily_Distracting, ~round(magrittr::extract(rev(.), 30:1)))[[index]], 
+                                                            map(Overview$daily_Productive, ~round(magrittr::extract(rev(.), 30:1)))[[index]]),
+                                             type = "bar",
+                                             height = 40,
+                                             width = colwidth_spark,
+                                             stackedBarColor = bar_col,
+                                             tooltipFormatter = JS(
+                                               sprintf(
+                                                 "function(sparkline, options, field){
+                                                           debugger;
+                                                           return('<b>'+ %s[field[0].offset] + '</b><br/>' +
+                                                           '<span style=color:' + field[0].color + '> &#9679 </span>' +
+                                                           Math.round(field[0].value) + ' min/day' + '<br/>' +
+                                                           '<span style=color:' + field[1].color + '> &#9679 </span>' +
+                                                           -Math.round(field[1].value) + ' min/day');
+                                                           }",
+                                                 jsonlite::toJSON(rev(Overview$DateLabel[[1]])[30:1])
+                                               )
+                                             ))
+                                 }),
+      monthly_Distracting = colDef(name = "Monthly Trend",
+                                   width = colwidth_spark,
+                                   cell = function(value, index) {
+                                     sparkline(values = cbind(-Overview$monthly_Distracting[[index]], 
+                                                              Overview$monthly_Productive[[index]]),
+                                               type = "bar", 
+                                               height = 40,
+                                               width = colwidth_spark,
+                                               stackedBarColor = bar_col,
+                                               tooltipFormatter = JS(
+                                                 sprintf(
+                                                   "function(sparkline, options, field){
+                                                           debugger;
+                                                           return('<b>'+ %s[field[0].offset] + '</b><br/>' +
+                                                           '<span style=color:' + field[0].color + '> &#9679 </span>' +
+                                                           Math.round(field[0].value) + ' min/day' + '<br/>' +
+                                                           '<span style=color:' + field[1].color + '> &#9679 </span>' +
+                                                           -Math.round(field[1].value) + ' min/day');
+                                                           }",
+                                                   jsonlite::toJSON(Overview$MonthLabel[[1]])
+                                                 )
+                                               ))
+                                   }),
+      Percentage = colDef(show = FALSE),
+      Productivity = colDef(show = FALSE),
+      Pulse_abs = colDef(show = FALSE),
+      MonthLabel = colDef(show = FALSE),
+      DateLabel = colDef(show = FALSE),
+      Daily_min = colDef(show = FALSE),
+      Daily_time = colDef(show = FALSE),
+      daily_Productive = colDef(show = FALSE),
+      monthly_Productive = colDef(show = FALSE))
+    
+    if(substitute(reactable_df) == "Cat"){
+      columns <- c(list(
+        "Category" = colDef(
+          name = "Category",
+          width = colwidth_name - padding_Cat,
+          cell = function(value, index){
+            donut <- donut(df = Cat, row = index, width = colwidth_donut)
+            div(style = list(display = "flex", alignItems = "center"),
+                donut,
+                div(style = list(marginLeft = "8px"), value))
+          }
+        ),
+        "Percentage" = colDef(show = FALSE)),
+        columns) %>%
+        assign_in(., "Overview", value = colDef(show = FALSE)) %>%
+        assign_in(., "monthly_Distracting", value = colDef(show = FALSE)) %>%
+        assign_in(., "daily_Distracting", value = colDef(show = FALSE))
     }
     
-  h_title <- 1.5
-  h_legend <- 1.8
+    if(substitute(reactable_df) == "Act") {
+      columns <- c(list(
+        "Activity" = colDef(
+          name = "Activity",
+          width = colwidth_name + padding_Cat - 2,
+          vAlign = "center",
+          cell = function(value, index) {
+            insert.icon(
+              df = Act, app = value, row = index, 
+              img_path_Activity = img_path_Activity,
+              recolor = recolor, fill = icon_col[3])
+          }
+        ),
+        "Category" = colDef(show = FALSE)),
+        columns,
+        list("icon" = colDef(show = FALSE))) %>%
+        assign_in(., "Overview", value = colDef(show = FALSE)) %>%
+        assign_in(., "daily_Distracting", value = colDef(show = FALSE)) 
+    }
+    return(columns)
+  }
   
-  # par(omi = rep(0.2, 4)/2.54)
-  layout(matrix(c(rep(1, 4), rep(2, 4), 3:14), nrow = 5, ncol =  4, byrow = TRUE), heights = lcm(c(h_title, h_legend)))
+  # function to add icon to value: ----
+  insert.icon <- function(df, app, row, 
+                          img_path_Activity, 
+                          icon_width = 24,
+                          recolor = FALSE, fill = "black"){
+    icon <- df[["icon"]][row]
+    icon_set <- ifelse(grepl(".png$", icon) == TRUE, "customicons",
+                       str_extract(icon, "^.*(?=\\s)"))
+    icon_name <- ifelse(grepl(".png$", icon) == TRUE, icon,
+                        str_extract(icon, "(?<=\\s).*$"))
+    
+    if(is.na(icon_set)) {
+      src_icon <- NULL
+    }
+    else if (icon_set == "customicons") {
+      img_file <- file.path(img_path_Activity, icon_name)
+      img <- readPNG(img_file)
+      if(recolor){
+        # change all black to icon_color
+        col <- col2rgb(fill)
+        img[, , 1][img[, , 1] == 0] <- col[1] / 255
+        img[, , 2][img[, , 2] == 0] <- col[2] / 255
+        img[, , 3][img[, , 3] == 0] <- col[3] / 255
+        # and save colored png:
+        icon_name <- paste0(str_extract(icon, "^.*(?=\\.png)"), "_colored.png")
+        writePNG(img, file.path(img_path_Activity, "colored", icon_name))
+      }
+      if(fill != "black"){
+        img_path_Activity <- file.path(img_path_Activity, "colored")
+        icon_name <- paste0(str_extract(icon, "^.*(?=\\.png)"), "_colored.png")
+      }
+      img <- knitr::image_uri(file.path(img_path_Activity, icon_name))
+      src_icon <- img(src = img, width = paste0(icon_width, "px"))
+    } else if (icon_set == "simple-icons") {
+      src_icon <- icon_style(simple_icons(icon_name),
+                             scale = icon_width / fontsize_Act, fill = fill)
+    } else if (icon_set == "academic-icons") {
+      src_icon <-
+        icon_style(academicons(icon_name), scale = 1.5, fill = fill)
+    } else if (icon_set == "fontawesome") {
+      src_icon <-
+        icon_style(fontawesome(icon_name), scale = 1.5, fill = fill)
+    }
+    
+    div(style = list(display = "flex", alignItems = "center"),
+        div(style = list(width = "40px"), src_icon),
+        div(style = list(marginLeft = "8px"), app))
+  }
   
-  # first plot is a title + subtitle
-  par(mar = c(0, 0, 0.2, 0)/2.54, family = "Comfortaa")
-  plot.new()
-  text(0, 1, "Productivity pulse of the 12 main Categories", 
-       adj = c(0, 1), col = "grey20", font = 2, cex = 2, xpd = TRUE)
-  text(0, 0.5, paste0("Measured with RescueTime (", length(all_dates), " days)"), 
-       adj = c(0, 1), col = "grey30", cex = 1.5, xpd = TRUE)
-  
-  # second plot is the legend:
-  par(mar = c(0, 0, 0, 0))
-  plot.new()
-  legend(0.5, 0.5, legend = levels(Category$Productivity),
-         fill = Productivity_col[levels(Category$Productivity)], 
-         title.adj = 0, title.col = "grey20",
-         y.intersp = 1.2, text.col = "grey30",
-         border = "transparent", ncol=2,
-         cex = 1.2, xjust = 0.5, yjust = 0.5, bty = "n", xpd = TRUE)
-  
-  # then add the individual donut plots:
-  walk(levels(Category$Overview), function(Overview){
-    img_path <- here("static", "img", "Trackers", "RescueTime", "Categories")
-    image <- readPNG(file.path(img_path, paste0(
-      gsub(" .*$", "", Overview), ".png")))
-
-    make.donut(df = Category, category = Overview)
-    rasterImage(image, xleft = -0.5, xright = 0.5, ybottom = -0.5, ytop = 0.5)
-   })
-}
-RT.overview()
-
-```
-
-## Sub-categories
-
-You can manually adjust the categorization in your RescueTime account, which is especially useful for frequently used, uncategorized applications that would otherwise be assigned a 'neutral' productivity score.
-
-```{r overview_data, echo=FALSE}
-add.overview <- function(df){
- data <- df %>%
-   mutate(Overview = case_when(
-      Category %in% c("Accounting","Administration", "Customer Relations", 
-                      "General Business", "Intelligence", "Marketing",
-                      "Operations", "Project Management","Sales") ~ 
-        "Business",
-      Category %in% c("Calendars", "Email", "General Communication & Scheduling", 
-                      "Instant Message", "Meetings", "Voice Chat") ~
-        "Communication & Scheduling",
-      Category %in% c("General Design & Composition", "Graphic Design", 
-                      "Presentation", "Writing") ~ 
-        "Design & Composition",
-      Category %in% c("Games", "Comedy", "General Entertainment", "Music", "Photos", "Video") ~
-        "Entertainment",
-      Category %in% c("Business", "General News & Opinion", "Regional", "Entertainment",
-                      "International", "Science & Technology", "Sports", "Society") ~
-        "News & Opinion",
-      Category %in% c("Business & Finance", "Employment", "Engineering & Technology", 
-                      "Food", "General Reference & Learning", "Health & Medicine", "Home & Garden", 
-                      "Legal & Gov't", "Maps & Regional", "Search", "Travel & Outdoors") ~
-        "Reference & Learning",
-      Category %in% c("Clothes & Personal", "Electronics", "General Shopping", 
-                      "Office") ~
-        "Shopping",
-      Category %in% c("General Social Networking", "Professional Networking") ~
-        "Social Networking",
-      Category %in% c("Data Modeling & Analysis", "Design & Planning", "Editing & IDEs", 
-                      "General Software Development", "Quality Assurance", "Systems Operations") ~
-        "Software Development",
-      Category %in% c("Anti-Virus & Spyware", "Browsers", "File Sharing", 
-                      "General Utilities", "Internet Utilities", "Virtualization", "Other") ~
-        "Utilities",
-      TRUE ~ "Uncategorized"),
-      Overview = fct_reorder(Overview, Time_sec, sum, .desc = TRUE))
-}
-summarise.table <- function(df, ...){
-  
-  group_vars <- enquos(...)
-  group_syms <- ensyms(...)
-  
-  data <- df %>%
-    mutate(Time_min = Time_sec / 60)
-  
-  ProdPulse <- data %>%
-    group_by(!!!group_vars, Productivity) %>%
-    summarise(Time = sum(Time_min)) %>%
-    complete(., Productivity, fill = list(Time = 0)) %>%
-    summarise(Productivity = list(as.character(Productivity)),
-              Pulse_rel = list(Time / sum(Time) * 100),
-              Pulse_abs = list(Time),
-              Daily_min = sum(Time)/ ndays,
-              Daily_time = case_when(Daily_min < 1 ~ paste(round(Daily_min * 60), "sec"),
-                                     TRUE ~ paste(round(Daily_min), "min")))
-
-  MonthlyTrend <- data %>%
-    mutate(ym = factor(format(DateTime, format = "%Y-%m")),
-           Productivity = case_when(grepl("Distracting", Productivity) ~ "Distracting",
-                                    TRUE ~ "Productive")) %>%
-    group_by(!!!group_vars, Productivity, ym) %>%
-    summarise(Time = round(sum(Time_min) / days_in_month(ym(first(ym)))[[1]]), .groups = "drop") %>%
-    # the nesting gave me headaches: !!enquo or {{}} does not work here...
-    complete(., expand(., nesting(!!!group_syms), Productivity, ym), 
-             fill = list(Time = 0)) %>%
-   group_by(!!!group_vars, Productivity) %>%
-   summarise(MonthlyTrend = list(Time),
-             MonthLabel = list(format(ym(ym), "%B %Y"))) %>%
-    pivot_wider(., names_from = Productivity, values_from = MonthlyTrend,
-                names_prefix = "monthly_")
-
-  DailyTrend <- data %>%
-    mutate(Productivity = case_when(grepl("Distracting", Productivity) ~ "Distracting",
-                                    TRUE ~ "Productive")) %>%
-    group_by(!!!group_vars, Productivity, Date) %>%
-    summarise(Time = sum(Time_min), .groups = "drop") %>%
-    right_join(., data.frame(Date = all_dates), by = "Date") %>%
-    complete(., expand(., nesting(!!!group_syms), Productivity, Date),
-             fill = list(Time = 0)) %>%
-    filter(if_all(all_of(c(map_chr(group_vars, rlang::as_name), "Productivity")), ~ !is.na(.))) %>% # turn the ... into vector with strings
-    group_by(!!!group_vars, Productivity) %>%
-    summarise(DailyTrend = list(Time),
-              DateLabel = list(format(Date, format = "%b %d %Y"))) %>%
-    pivot_wider(., names_from = Productivity, values_from = DailyTrend,
-                names_prefix = "daily_")
-
-  Summary <-  ProdPulse %>%
-    left_join(., DailyTrend) %>%
-    left_join(., MonthlyTrend)
-}
-
-Overview <- RescueTime[["pc"]] %>%
-  add.overview() %>%
-  summarise.table(., Overview)
-
-
-```
-
-```{r reactable, echo=FALSE}
-library(reactable) 
-library(htmltools)
-library(sparkline)
-
-make.reactable.RT <- function(df, groupBy = NULL){
-  
-  months <- df$MonthLabel[[1]]
-  distr_m <- df$monthly_Distracting
-  prod_m <- df$monthly_Productive
-  days_14 <- rev(df$DateLabel[[1]])[14:1]
-  distr_14d <- map(df$daily_Distracting, ~round(magrittr::extract(rev(.), 14:1)))
-  prod_14d <- map(df$daily_Productive, ~round(magrittr::extract(rev(.), 14:1)))
-  
-  stacked_bar <- function(df, list_of_values, row, height = "28px", full_width){
+  # Variables for reactable: ----
+  stacked_bar <- function(df, list_of_values, row, height = "28px"){
     full_width <- max(df[["Daily_min"]])
     width_bar <- df[["Daily_min"]][row]
     
-    label <- div(style = list(flexGrow = 1, marginLeft = "8px"), df[["Daily_time"]][row])
+    label <- div(style = list(flexGrow = 1, marginLeft = "8px", 
+                              fontSize = "12px"), df[["Daily_time"]][row])
     
     divs <- imap(list_of_values, function(value, i){
       bar <- div(style = list(background = Productivity_col[[df[["Productivity"]][[row]][i]]],
@@ -438,147 +427,255 @@ make.reactable.RT <- function(df, groupBy = NULL){
     })
     div(style = list(display = "flex", alignItems = "center"), divs, label)
   }
-  
-  reactable(df, 
+  bar_col <- unname(Productivity_col[c("Very Distracting", "Very Productive")])
+  donut <- function(df, row, width = 60){
+    percentage <- df[["Percentage"]][row]
+    productivity <- Overview[["Productivity"]][[1]]
+    colors <- unname(Productivity_col[productivity])
+    r <- width / 2.5
+    length <- 2 * pi * r
+    
+    values <- unlist(df[["Pulse_rel"]][row]) * percentage
+    slice_end <- cumsum(values) 
+    slice_begin <- c(0, slice_end[-5])
+    
+    label <-  div(style = list(position = "absolute", fontSize = "12px", 
+                               lineHeight = paste0(width, "px")),
+                  paste0(round(percentage * 100), "%"))
+    
+    circle <- tags$circle(cx = 0.5 * width, cy = 0.5 * width, r = r, fill = "transparent", 
+                          stroke = rgb(0,0,0,0.1), strokeWidth = width / 5)
+    
+    slices <- imap(values, function(value, i){
+      array <- c(value, 100 - value) / 100
+      offset <- (100 - slice_begin[i] + 25) %% 100
+      
+      slice <- tags$circle(cx = 0.5 * width, cy = 0.5 * width, r = r, fill = "transparent", 
+                           stroke = colors[i], strokeWidth = width / 5, 
+                           strokeDasharray = array * length,
+                           strokeDashoffset = offset / 100 * length)
+    })
+    
+    donut <- tags$svg(circle, slices)
+    div(style = list(width = width, height = width, justifyContent = "center",
+                     display = "inline-flex", position = "relative"), donut, label)
+  }
+
+  # make the reactable: ----
+  reactable(
+    Overview,
+    pagination = FALSE,
+    sortable = FALSE,
+    theme = reactableTheme(
+      color = icon_col[3],
+      borderColor = icon_col[2],
+      cellPadding = "8px 8px",
+      headerStyle = list(fontSize = "16px"),
+      style = list(fontFamily = "Comfortaa",
+                   fontSize = "15px")
+    ),
+    defaultColDef = colDef(vAlign = "center", headerVAlign = "bottom"),
+    columns = set.columns(Overview),
+    details = function(index) {
+      Cat <- Category[Category$Overview == Overview$Overview[index], ]
+      if (length(unique(Cat$Category)) > 1) {
+        div(
+          style = list(padding = paste0(padding_Cat, "px")),
+          reactable(
+            Cat,
             pagination = FALSE,
             sortable = FALSE,
-            groupBy = groupBy,
-            columns = list(
-              Overview = colDef(name = "Main Category",
-                                minWidth = 250, 
-                                cell = function(value){
-                                  img_src <- knitr::image_uri(paste0(
-                                    here("static", "img", "Trackers", "RescueTime", "Categories"), "/",
-                                    gsub(" .*$", "", value), ".png"))
-                                  image <- img(src = img_src, width = "48px", alt = value)
-                                  div(style = list(display = "flex", alignItems = "center"),
-                                      image,
-                                      div(style = list(marginLeft = "8px"), value))
-                                }),
-              Productivity = colDef(show = FALSE),
-              Pulse_abs = colDef(show = FALSE),
-              MonthLabel = colDef(show = FALSE),
-              DateLabel = colDef(show = FALSE),
-              Pulse_rel = colDef(name = "Average Time per Day",
-                                 cell = function(value, index) {
-                                   stacked_bar(df = df,
-                                               list_of_values = value,
-                                               row = index, height = "36px")
-                                 },
-                                 minWidth = 200),
-              Daily_min = colDef(show = FALSE),
-              Daily_time = colDef(show = FALSE),
-              daily_Distracting = colDef(name = "Last 14 days", 
-                                         cell = function(value, index) {
-                                           sparkline(values = cbind(-distr_14d[[index]], prod_14d[[index]]),
-                                                     type = "bar", 
-                                                     height = 48,
-                                                     stackedBarColor = unname(Productivity_col[c("Very Distracting", "Very Productive")]),
-                                                     tooltipFormatter = htmlwidgets::JS(
-                                                       sprintf(
-                                                         "function(sparkline, options, field){
-                                                             debugger;
-                                                             return('<b>'+ %s[field[0].offset] + '</b><br/>' + 
-                                                             '<span style=color:' + field[0].color + '> &#9679 </span>' +  
-                                                             field[0].value + ' min/day' + '<br/>' +
-                                                             '<span style=color:' + field[1].color + '> &#9679 </span>' + 
-                                                             -field[1].value + ' min/day');
-                                                             }",
-                                                         jsonlite::toJSON(rev(Overview$DateLabel[[1]])[14:1])
-                                                       )
-                                                     ))
-                                         }),
-              daily_Productive = colDef(show = FALSE),
-              monthly_Distracting = colDef(name = "Monthly Trend", 
-                                           cell = function(value, index) {
-                                             sparkline(values = cbind(-distr_m[[index]], prod_m[[index]]),
-                                                       type = "bar", 
-                                                       # chartRangeMin = -max(c(distr_m[[index]], distr_14d[[index]]), na.rm = TRUE), 
-                                                       # chartRangeMax = max(c(prod_m[[index]], prod_14d[[index]]), na.rm = TRUE), 
-                                                       height = 48,
-                                                       stackedBarColor = unname(Productivity_col[c("Very Distracting", "Very Productive")]),
-                                                       tooltipFormatter = htmlwidgets::JS(
-                                                           sprintf(
-                                                             "function(sparkline, options, field){
-                                                             debugger;
-                                                             return('<b>'+ %s[field[0].offset] + '</b><br/>' + 
-                                                             '<span style=color:' + field[0].color + '> &#9679 </span>' +  
-                                                             field[0].value + ' min/day' + '<br/>' +
-                                                             '<span style=color:' + field[1].color + '> &#9679 </span>' + 
-                                                             -field[1].value + ' min/day');
-                                                             }",
-                                                             jsonlite::toJSON(months)
-                                                           )
-                                                         ))
-                                           }),
-              monthly_Productive = colDef(show = FALSE)),
+            outlined = TRUE,
             theme = reactableTheme(
-              color = "black",
-              borderColor = "grey80",
-              cellPadding = "8px 8px",
-              style = list(fontFamily = "Comfortaa")))
+              backgroundColor = icon_col[1],
+              color = icon_col[3],
+              borderColor = icon_col[2],
+              headerStyle = list(fontSize = "15px"),
+              style = list(fontSize = "14px")
+            ),
+            defaultColDef = colDef(vAlign = "center", headerVAlign = "bottom"),
+            columns = set.columns(Cat) %>%
+              assign_in(
+                .,
+                list("Category", "cell"),
+                value = function(value, index){
+                  donut <- donut(df = Cat, row = index, width = 48)
+                  div(style = list(display = "flex", alignItems = "center"),
+                      donut,
+                      div(style = list(marginLeft = "8px"), value))
+                }
+              ) %>%
+              assign_in(
+                .,
+                list("Pulse_rel", "cell"),
+                value =  function(value, index) {
+                  stacked_bar(
+                    df = Cat,
+                    list_of_values = value,
+                    row = index,
+                    height = "40px"
+                  )
+                }
+              ),
+            details = function(index) {
+              Act <- Activity[Activity$Category == Cat$Category[index], ] %>%
+                filter(Daily_min > time_limit)
+              if (length(unique(Act$Activity)) >= 1) {
+                div(
+                  style = list(padding = "16px"),
+                  reactable(
+                    Act,
+                    sortable = FALSE,
+                    outlined = TRUE,
+                    theme = reactableTheme(
+                      color = icon_col[3],
+                      borderColor = icon_col[2],
+                      headerStyle = list(fontSize = "15px"),
+                      style = list(fontSize = paste0(fontsize_Act, "px"))
+                    ),
+                    defaultColDef = colDef(vAlign = "center", headerVAlign = "bottom"),
+                    columns = set.columns(Act) %>%
+                      assign_in(
+                        .,
+                        list("Pulse_rel", "cell"),
+                        value =  function(value, index) {
+                          stacked_bar(
+                            df = Act,
+                            list_of_values = value,
+                            row = index,
+                            height = "40px"
+                          )
+                        }
+                      ) %>%
+                      assign_in(
+                        .,
+                        list("Activity", "cell"),
+                        value = function(value, index) {
+                          insert.icon(
+                            df = Act,
+                            app = value,
+                            row = index,
+                            img_path_Activity = img_path_Activity,
+                            recolor = recolor,
+                            fill = icon_col[3]
+                          )
+                        }
+                      ) %>%
+                      assign_in(
+                        .,
+                        list("monthly_Distracting", "cell"),
+                        value = function(value, index) {
+                          sparkline(
+                            values = cbind(
+                              -Act$monthly_Distracting[[index]],
+                              Act$monthly_Productive[[index]]
+                            ),
+                            type = "bar",
+                            height = 40,
+                            width = colwidth_spark,
+                            stackedBarColor = bar_col,
+                            tooltipFormatter = JS(
+                              sprintf(
+                                "function(sparkline, options, field){
+                                                           debugger;
+                                                           return('<b>'+ %s[field[0].offset] + '</b><br/>' +
+                                                           '<span style=color:' + field[0].color + '> &#9679 </span>' +
+                                                           Math.round(field[0].value) + ' min/day' + '<br/>' +
+                                                           '<span style=color:' + field[1].color + '> &#9679 </span>' +
+                                                           -Math.round(field[1].value) + ' min/day');
+                                                           }",
+                                jsonlite::toJSON(Act$MonthLabel[[1]])
+                              )
+                            )
+                          )
+                        }
+                      ) %>%
+                      assign_in(
+                        .,
+                        "daily_Distracting",
+                        value = colDef(
+                          name = "Daily time",
+                          width = colwidth_spark,
+                          cell = function(value, index) {
+                            sparkline(
+                              values = Act$daily_Productive[[index]] - Act$daily_Distracting[[index]],
+                              type = "bar",
+                              height = 40,
+                              width = colwidth_spark,
+                              barColor = 	bar_col[2],
+                              negBarColor	= bar_col[1],
+                              tooltipFormatter = JS(
+                                sprintf(
+                                  "function(sparkline, options, field){
+                                                           debugger;
+                                                           return('<b>'+ %s[field[0].offset] + '</b><br/>' +
+                                                           '<span style=color:' + field[0].color + '> &#9679 </span>' +
+                                                           Math.round(field[0].value) + ' minutes');
+                                                           }",
+                                  jsonlite::toJSON(Overview$DateLabel[[1]])
+                                )
+                              )
+                            )
+                          }
+                        )
+                      )
+                  )
+                )
+              }
+            }
+          )
+        )
+      }
+    }
+  )
 }
-tbl <- make.reactable.RT(df = Overview)
 
-div(class= "overview",
-  div(class = "title",
-  h2("Overview of Productive and Distracting time across all Categories"),
-  paste0("Measured with Rescue Time (",
-                      ndays, " days; last day = ", 
-                      rev(RescueTime[["pc"]]$Date)[1], ")")
-  ),
-  tbl
-)
+tbl <- make.reactable(Overview = RescueTime[["Overview"]],
+               Category = RescueTime[["Category"]],
+               Activity = RescueTime[["Activity"]],
+               img_path_Overview = here("static", "img", "Trackers", "RescueTime", "Categories"),
+               img_path_Activity = here("static", "img", "Trackers", "RescueTime", "Activity"),
+               time_limit = 1/60,
+               recolor = FALSE)
+```
+
+```{r reactable2, fig.width = 9, echo=FALSE}
+# figure out how to change font
+
+div(class = "table",
+    div(
+      class = "header",
+      img(class = "logo", src = knitr::image_uri(
+        here("static", "img", "app_logos", "RescueTime.png")
+      )),
+      div(
+        class = "subtitle",
+        div(
+          class = "title",
+          "How do I spend my time on my laptop?"
+        ),
+        paste0(
+          "Measured with Rescue Time (",
+          ndays, " days)"
+        )
+      )
+    ),
+    tbl,
+    div(class = "caption",
+        paste("Measured between",
+              format(RescueTime[["pc"]]$Date[1], format = "%d %b'%y"),
+              "-",
+              format(rev(RescueTime[["pc"]]$Date)[1], format = "%d %b'%y")))
+    )
 
 ```
 
-De margins klopt nog geen bal van: left en right ok (maar dubbelop voor h2); top en bottom lijkt niets te doen?
-
-```{css echo = FALSE}
-.overview{
-  background-color: white;
-  font-family:Comfortaa;
-}
-.title{
-  font-size: 20px;
-  margin: 18px 5px 10px 5px;
-}
-
-.title h2{
-  font-family:Comfortaa;
-  font-size: 24px;
-  font-weight: 600;
-  margin: 18px 5px 10px 5px;
-}
-```
-
-With reactable fmtr:
-
-```{r reactable_fmtr, echo = FALSE}
-library(reactablefmtr)
-
-make.reactable.RT(df = Overview) %>%
-  add_title("Overview of Productive and Distracting time on computer",
-            font_family = "Comfortaa", font_color = rgb(t(col2rgb("grey20")/255))) %>%
-  add_subtitle(paste0("Measured with Rescue Time (", ndays, 
-                      " days; last day = ", 
-                      rev(RescueTime[["pc"]]$Date)[1], ")"),
-               font_family = "Comfortaa", 
-               font_color = rgb(t(col2rgb("grey30")/255)),
-               font_weight = "normal",
-               font_size = 20,
-               margin = margin(5,0,10,0))
-```
-
-## Activities
-
-Moreoever, the RescueTime app on your desktop computer tracks the time spent on each individual application, website or activity. The Treemap in Figure xxx shows that **R Studio** is clearly my favorite application!
 
 <img src="/img/app_logos/RescueTime.png" width="10%" style="float:left; border-radius:10%; margin:5px;"/>
 
 ## Conclusion
 
-The RescueTime app allows you to freely and silently gather a wealth of data about your computer and phone use. Although your RescueTime account already allows you to view your statistics and create reports in various ways, the best part of the RescueTime app - to me `r emo::ji("blush")` - is the accessibility of your own data. However, when using the RescueTime API, you need to make sure to download and store your data at least every 3 months.
+The RescueTime app allows you to freely and silently gather a wealth of data about your computer and mobile phone usage. Although your RescueTime account already allows you to view your statistics and create reports in various ways, the best part of the RescueTime app - to me `r emo::ji("blush")` - is the accessibility of your own data. However, when using the RescueTime API, you need to make sure to download and store your data at least every 3 months.
 
 If you want to improve your productivity, the RescueTime app offers various tools to, for example, set goals or time limits, or even block certain (distracting) applications or websites. A Premium subscription offers even more tools to potentially enhance your productivity, but comes at a monthly cost of \$12 (or $78 annually) which, for me, is not worth the merits.
 
@@ -602,3 +699,47 @@ If you want to improve your productivity, the RescueTime app offers various tool
 - `r fontawesome::fa("github")` Code to collect, analyze and visualize my RescueTime data on [Github](https://github.com/IreneVDB/RescueTime)
 - RescueTime [website](https://www.rescuetime.com)
 - RescueTime [API documentation](https://www.rescuetime.com/anapi/setup/documentation)
+
+```{r echo=FALSE}
+tags$link(href="https://fonts.googleapis.com/css?family=Comfortaa",
+          rel="stylesheet")
+```
+
+```{css echo=FALSE}
+.table{
+  background-color: white;
+}
+.subtitle{
+  font-size: 18px;
+}
+.title{
+  font-size: 24px;
+  font-weight: 600;
+  margin-top: 8px;
+  margin-bottom: 12px;
+  text-align:left;
+}
+.header{
+  display: flex;
+  align-items: center;
+  align-content: flex-start;
+  font-family: Comfortaa;
+  color: #251a66;
+  margin-left: 8px;
+  margin-right: 8px;
+  margin-bottom: 18px;
+}
+.logo{
+  width: 64px;
+  height: 64px;
+  margin-right: 8px;
+}
+.caption{
+  font-size:12px;
+  font-family: Comfortaa;
+  color:#251a66;
+  margin-left: 8px;
+  margin-bottom: 12px;
+  margin-top: 10px;
+}
+```
