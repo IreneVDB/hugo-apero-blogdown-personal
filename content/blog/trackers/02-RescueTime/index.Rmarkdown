@@ -228,7 +228,7 @@ make.reactable <- function(Overview, Category, Activity,
                            img_path_Activity = "img/Programs",
                            fontsize_Act = 14,
                            padding_Cat = 16,
-                           colwidth_spark = 135,
+                           colwidth_spark = 130,
                            time_limit, recolor){
   
   Productivity_col <- rgb(red = c(13, 65, 177, 218, 212, 160),
@@ -242,8 +242,8 @@ make.reactable <- function(Overview, Category, Activity,
   
   # Define columns for Overview, Category, Activity ----
   set.columns <- function(reactable_df,
-                          colwidth_name = 260, 
-                          colwidth_pulse = 200,
+                          colwidth_name = 250, 
+                          colwidth_pulse = 180,
                           colwidth_donut = 48,
                           col_height = 52){
     
@@ -273,7 +273,7 @@ make.reactable <- function(Overview, Category, Activity,
                                                             map(Overview$daily_Productive, ~round(magrittr::extract(rev(.), 30:1)))[[index]]),
                                              type = "bar",
                                              height = 40,
-                                             width = colwidth_spark,
+                                             width = paste0(colwidth_spark, "px"),
                                              stackedBarColor = bar_col,
                                              tooltipFormatter = JS(
                                                sprintf(
@@ -601,7 +601,7 @@ make.reactable <- function(Overview, Category, Activity,
                               values = Act$daily_Productive[[index]] - Act$daily_Distracting[[index]],
                               type = "bar",
                               height = 40,
-                              width = colwidth_spark,
+                              width = paste0(colwidth_spark, "px"),
                               barColor = 	bar_col[2],
                               negBarColor	= bar_col[1],
                               tooltipFormatter = JS(
