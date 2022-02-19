@@ -14,7 +14,7 @@ sidebar:
   title: You R What You Measure Blog
   description: |
     Posts about tracking, analyzing and visualizing **Health** & **Habits**.
-    <p>
+    <p> <br> <br>
     <i class="fas fa-bed"></i> SLEEP: <br>
     
     <img src="/img/app_logos/Oura.png" width="10%" style="border-radius:10%; margin:5px;"/> 
@@ -67,6 +67,7 @@ sidebar:
     <img src="/img/app_logos/RescueTime.png" width="10%" style="border-radius:10%; margin:5px;"/>
     <img src="/img/app_logos/Goodreads.png" width="10%" style="border-radius:10%; margin:5px;"/>
     <img src="/img/app_logos/Moment.png" width="10%" style="border-radius:10%; margin:5px;"/>
+ <br>
  
   author: ""
   text_link_label: ""
