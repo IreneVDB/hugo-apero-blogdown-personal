@@ -38,9 +38,9 @@ In the below panels you see an overview of all *numeric* data values measured wi
 
 <div class="figure">
 
-<img src="{{< blogdown/postref >}}index_files/figure-html/SleepMetrics-1.png" alt="\label{fig:SleepMetrics}Distribution of daily sleep metrics measured wih the Ōura Ring, including the durations of various sleep phases (**Rem**, **Deep** and **Light**), the total sleep time (**Total**), the time in bed (**Duration**), the time awake (**Awake**), the time to fall asleep (**Onset Latency**), as well as the percentage of time asleep (**Effciency**) and the percentag of time that motion is detected (**Restless**). In addition, the average breathing rate (**Breath Average**), the average and lowest heart rate (**Hr Average** and **Hr Lowest**), the average heart rate variability (**Rmssd**) and the average skin temperature deviation (**Temperature Deviation**) are provided." width="720" />
+<img src="{{< blogdown/postref >}}index_files/figure-html/SleepMetrics-1.png" alt="Distribution of daily sleep metrics measured wih the Ōura Ring, including the durations of various sleep phases (Rem, Deep and Light), the total sleep time (Total), the time in bed (Duration), the time awake (Awake), the time to fall asleep (Onset Latency), as well as the percentage of time asleep (Effciency) and the percentag of time that motion is detected (Restless). In addition, the average breathing rate (Breath Average), the average and lowest heart rate (Hr Average and Hr Lowest), the average heart rate variability (Rmssd) and the average skin temperature deviation (Temperature Deviation) are provided." width="720" />
 <p class="caption">
-Figure 1: Distribution of daily sleep metrics measured wih the Ōura Ring, including the durations of various sleep phases (**Rem**, **Deep** and **Light**), the total sleep time (**Total**), the time in bed (**Duration**), the time awake (**Awake**), the time to fall asleep (**Onset Latency**), as well as the percentage of time asleep (**Effciency**) and the percentag of time that motion is detected (**Restless**). In addition, the average breathing rate (**Breath Average**), the average and lowest heart rate (**Hr Average** and **Hr Lowest**), the average heart rate variability (**Rmssd**) and the average skin temperature deviation (**Temperature Deviation**) are provided.
+Figure 1: Distribution of daily sleep metrics measured wih the Ōura Ring, including the durations of various sleep phases (<strong>Rem</strong>, <strong>Deep</strong> and <strong>Light</strong>), the total sleep time (<strong>Total</strong>), the time in bed (<strong>Duration</strong>), the time awake (<strong>Awake</strong>), the time to fall asleep (<strong>Onset Latency</strong>), as well as the percentage of time asleep (<strong>Effciency</strong>) and the percentag of time that motion is detected (<strong>Restless</strong>). In addition, the average breathing rate (<strong>Breath Average</strong>), the average and lowest heart rate (<strong>Hr Average</strong> and <strong>Hr Lowest</strong>), the average heart rate variability (<strong>Rmssd</strong>) and the average skin temperature deviation (<strong>Temperature Deviation</strong>) are provided.
 </p>
 
 </div>
@@ -53,9 +53,9 @@ Figure 1: Distribution of daily sleep metrics measured wih the Ōura Ring, inclu
 
 <div class="figure">
 
-<img src="{{< blogdown/postref >}}index_files/figure-html/ActivityMetrics-1.png" alt="\label{fig:ActivityMetrics}Distribution of all daily activity metrics measured wih the Ōura Ring, including active and total calories (**Cal Active** and **Cal Total**), step count (**Steps**), distance moved equivalent (**Daily Movement**), the duration of **Non Wear**, **Rest** and **Inactive** time as well as active time (**Total**) with **Low**, **Medium**, or **High** intensity, and the metabilic equivelent minutes as daily average (**Average Met**) or as total during **Inactive** time or time with **Low**, **Medium** or **High** intensity activity." width="720" />
+<img src="{{< blogdown/postref >}}index_files/figure-html/ActivityMetrics-1.png" alt="Distribution of all daily activity metrics measured wih the Ōura Ring, including active and total calories (Cal Active and Cal Total), step count (Steps), distance moved equivalent (Daily Movement), the duration of Non Wear, Rest and Inactive time as well as active time (Total) with Low, Medium, or High intensity, and the metabilic equivelent minutes as daily average (Average Met) or as total during Inactive time or time with Low, Medium or High intensity activity." width="720" />
 <p class="caption">
-Figure 2: Distribution of all daily activity metrics measured wih the Ōura Ring, including active and total calories (**Cal Active** and **Cal Total**), step count (**Steps**), distance moved equivalent (**Daily Movement**), the duration of **Non Wear**, **Rest** and **Inactive** time as well as active time (**Total**) with **Low**, **Medium**, or **High** intensity, and the metabilic equivelent minutes as daily average (**Average Met**) or as total during **Inactive** time or time with **Low**, **Medium** or **High** intensity activity.
+Figure 2: Distribution of all daily activity metrics measured wih the Ōura Ring, including active and total calories (<strong>Cal Active</strong> and <strong>Cal Total</strong>), step count (<strong>Steps</strong>), distance moved equivalent (<strong>Daily Movement</strong>), the duration of <strong>Non Wear</strong>, <strong>Rest</strong> and <strong>Inactive</strong> time as well as active time (<strong>Total</strong>) with <strong>Low</strong>, <strong>Medium</strong>, or <strong>High</strong> intensity, and the metabilic equivelent minutes as daily average (<strong>Average Met</strong>) or as total during <strong>Inactive</strong> time or time with <strong>Low</strong>, <strong>Medium</strong> or <strong>High</strong> intensity activity.
 </p>
 
 </div>
@@ -70,7 +70,7 @@ Based on the Sleep and Activity metrics, the Ōura Ring calculates a daily **Sle
 
 <div class="figure">
 
-<img src="{{< blogdown/postref >}}index_files/figure-html/TotalScores-1.png" alt="\label{fig:TotalScores}Distribution of daily Sleep, Activity and Readiness Scores measured wih the Ōura Ring." width="720" />
+<img src="{{< blogdown/postref >}}index_files/figure-html/TotalScores-1.png" alt="Distribution of daily Sleep, Activity and Readiness Scores measured wih the Ōura Ring." width="720" />
 <p class="caption">
 Figure 3: Distribution of daily Sleep, Activity and Readiness Scores measured wih the Ōura Ring.
 </p>
@@ -85,9 +85,9 @@ Figure 3: Distribution of daily Sleep, Activity and Readiness Scores measured wi
 
 <div class="figure">
 
-<img src="{{< blogdown/postref >}}index_files/figure-html/SleepScores-1.png" alt="\label{fig:SleepScores}The daily Sleep Score is based on the individual scores for the total amount of sleep (**Total**), the amount of **REM** and **Deep** sleep, the percentage sleep from the time in bed **Efficiency**, the time it takes to fall asleep (**Latency**), the amount of restlessness (**Disturbances**) and the sleep timing (**Alignment**)." width="720" />
+<img src="{{< blogdown/postref >}}index_files/figure-html/SleepScores-1.png" alt="The daily Sleep Score is based on the individual scores for the total amount of sleep (Total), the amount of REM and Deep sleep, the percentage sleep from the time in bed Efficiency, the time it takes to fall asleep (Latency), the amount of restlessness (Disturbances) and the sleep timing (Alignment)." width="720" />
 <p class="caption">
-Figure 4: The daily Sleep Score is based on the individual scores for the total amount of sleep (**Total**), the amount of **REM** and **Deep** sleep, the percentage sleep from the time in bed **Efficiency**, the time it takes to fall asleep (**Latency**), the amount of restlessness (**Disturbances**) and the sleep timing (**Alignment**).
+Figure 4: The daily Sleep Score is based on the individual scores for the total amount of sleep (<strong>Total</strong>), the amount of <strong>REM</strong> and <strong>Deep</strong> sleep, the percentage sleep from the time in bed <strong>Efficiency</strong>, the time it takes to fall asleep (<strong>Latency</strong>), the amount of restlessness (<strong>Disturbances</strong>) and the sleep timing (<strong>Alignment</strong>).
 </p>
 
 </div>
@@ -100,9 +100,9 @@ Figure 4: The daily Sleep Score is based on the individual scores for the total 
 
 <div class="figure">
 
-<img src="{{< blogdown/postref >}}index_files/figure-html/ActivityScores-1.png" alt="\label{fig:ActivityScores}The daily Activity Score is based on the amount of **Recovery Time**, the amount and regularity of physical exercise (**Training Volume** and **Training Frequency**) and the frequency of reaching the daily activity goals (**Meet Daily Targets**) during the last seven days. In addition , the activity scores take into account the avoidance of (long periods of) inactivity (**Stay Active** and **Move Every Hour**) during the last 24 h ." width="720" />
+<img src="{{< blogdown/postref >}}index_files/figure-html/ActivityScores-1.png" alt="The daily Activity Score is based on the amount of Recovery Time, the amount and regularity of physical exercise (Training Volume and Training Frequency) and the frequency of reaching the daily activity goals (Meet Daily Targets) during the last seven days. In addition , the activity scores take into account the avoidance of (long periods of) inactivity (Stay Active and Move Every Hour) during the last 24 h." width="720" />
 <p class="caption">
-Figure 5: The daily Activity Score is based on the amount of **Recovery Time**, the amount and regularity of physical exercise (**Training Volume** and **Training Frequency**) and the frequency of reaching the daily activity goals (**Meet Daily Targets**) during the last seven days. In addition , the activity scores take into account the avoidance of (long periods of) inactivity (**Stay Active** and **Move Every Hour**) during the last 24 h .
+Figure 5: The daily Activity Score is based on the amount of <strong>Recovery Time</strong>, the amount and regularity of physical exercise (<strong>Training Volume</strong> and <strong>Training Frequency</strong>) and the frequency of reaching the daily activity goals (<strong>Meet Daily Targets</strong>) during the last seven days. In addition , the activity scores take into account the avoidance of (long periods of) inactivity (<strong>Stay Active</strong> and <strong>Move Every Hour</strong>) during the last 24 h.
 </p>
 
 </div>
@@ -115,9 +115,9 @@ Figure 5: The daily Activity Score is based on the amount of **Recovery Time**, 
 
 <div class="figure">
 
-<img src="{{< blogdown/postref >}}index_files/figure-html/ReadinessScores-1.png" alt="\label{fig:ReadinessScores}The daily Readiness Score is based on the activity level of the **Previous Day** as well as the sleep quality of the **Previous Night**. In addition, the readiness score takes into account the deviation of the nightly values for HRV (**HRV Balance**), resting heart rate (**resting HR**), and Skin Temperature (**Temperature**) compared to their normal ranges. The readiness score furthermore measures the balance between low, medium and high intensity activities (**Activity Balance**), the long term sleep pattern (**Sleep Balance**) and how long it takes for the resting heart rate to stabilize during the night (**Recovery Index**)." width="720" />
+<img src="{{< blogdown/postref >}}index_files/figure-html/ReadinessScores-1.png" alt="The daily Readiness Score is based on the activity level of the Previous Day as well as the sleep quality of the Previous Night. In addition, the readiness score takes into account the deviation of the nightly values for HRV (HRV Balance), resting heart rate (resting HR), and Skin Temperature (Temperature) compared to their normal ranges. The readiness score furthermore measures the balance between low, medium and high intensity activities (Activity Balance), the long term sleep pattern (Sleep Balance) and how long it takes for the resting heart rate to stabilize during the night (Recovery Index)." width="720" />
 <p class="caption">
-Figure 6: The daily Readiness Score is based on the activity level of the **Previous Day** as well as the sleep quality of the **Previous Night**. In addition, the readiness score takes into account the deviation of the nightly values for HRV (**HRV Balance**), resting heart rate (**resting HR**), and Skin Temperature (**Temperature**) compared to their normal ranges. The readiness score furthermore measures the balance between low, medium and high intensity activities (**Activity Balance**), the long term sleep pattern (**Sleep Balance**) and how long it takes for the resting heart rate to stabilize during the night (**Recovery Index**).
+Figure 6: The daily Readiness Score is based on the activity level of the <strong>Previous Day</strong> as well as the sleep quality of the <strong>Previous Night</strong>. In addition, the readiness score takes into account the deviation of the nightly values for HRV (<strong>HRV Balance</strong>), resting heart rate (<strong>resting HR</strong>), and Skin Temperature (<strong>Temperature</strong>) compared to their normal ranges. The readiness score furthermore measures the balance between low, medium and high intensity activities (<strong>Activity Balance</strong>), the long term sleep pattern (<strong>Sleep Balance</strong>) and how long it takes for the resting heart rate to stabilize during the night (<strong>Recovery Index</strong>).
 </p>
 
 </div>
@@ -132,9 +132,9 @@ In addition to the daily aggregates, the Ōura Ring data also consists of a few 
 
 <div class="figure">
 
-<img src="{{< blogdown/postref >}}index_files/figure-html/SleepTimes-1.png" alt="\label{fig:SleepTimes} The Ōura Ring data includes timestamps for the time at which you go to bed (**Bedtime Start**), the time that you get up (**Bedtime End**) and the time in the middle of your sleep (**Midpoint**),used to calculate the Alignment score for sleep timing." width="720" />
+<img src="{{< blogdown/postref >}}index_files/figure-html/SleepTimes-1.png" alt="The Ōura Ring data includes timestamps for the time at which you go to bed (Bedtime Start), the time that you get up (Bedtime End) and the time in the middle of your sleep (Midpoint),used to calculate the Alignment score for sleep timing." width="720" />
 <p class="caption">
-Figure 7: The Ōura Ring data includes timestamps for the time at which you go to bed (**Bedtime Start**), the time that you get up (**Bedtime End**) and the time in the middle of your sleep (**Midpoint**),used to calculate the Alignment score for sleep timing.
+Figure 7: The Ōura Ring data includes timestamps for the time at which you go to bed (<strong>Bedtime Start</strong>), the time that you get up (<strong>Bedtime End</strong>) and the time in the middle of your sleep (<strong>Midpoint</strong>),used to calculate the Alignment score for sleep timing.
 </p>
 
 </div>
@@ -151,9 +151,9 @@ For a few metrics the Ōura Ring data provides data with higher granularity. Dur
 
 <div class="figure">
 
-<img src="{{< blogdown/postref >}}index_files/figure-html/Hypnogram-1.png" alt="\label{fig:Hypnogram} The Ōura Ring records the sleep phase classification (**Awake**, **Deep** sleep, **Light** sleep or **REM** sleep) for every 5 minutes during the entire sleep period." width="720" />
+<img src="{{< blogdown/postref >}}index_files/figure-html/Hypnogram-1.png" alt="The Ōura Ring records the sleep phase classification (Awake, Deep sleep, Light sleep or REM sleep) for every 5 minutes during the entire sleep period." width="720" />
 <p class="caption">
-Figure 8: The Ōura Ring records the sleep phase classification (**Awake**, **Deep** sleep, **Light** sleep or **REM** sleep) for every 5 minutes during the entire sleep period.
+Figure 8: The Ōura Ring records the sleep phase classification (<strong>Awake</strong>, <strong>Deep</strong> sleep, <strong>Light</strong> sleep or <strong>REM</strong> sleep) for every 5 minutes during the entire sleep period.
 </p>
 
 </div>
@@ -166,7 +166,7 @@ Figure 8: The Ōura Ring records the sleep phase classification (**Awake**, **De
 
 <div class="figure">
 
-<img src="{{< blogdown/postref >}}index_files/figure-html/HRV-1.png" alt="\label{fig:HRV} The Ōura Ring records the heart rate variability (HRV) as rmssd for every 5 minutes during the entire sleep period." width="720" />
+<img src="{{< blogdown/postref >}}index_files/figure-html/HRV-1.png" alt="The Ōura Ring records the heart rate variability (HRV) as rmssd for every 5 minutes during the entire sleep period." width="720" />
 <p class="caption">
 Figure 9: The Ōura Ring records the heart rate variability (HRV) as rmssd for every 5 minutes during the entire sleep period.
 </p>
@@ -181,7 +181,7 @@ Figure 9: The Ōura Ring records the heart rate variability (HRV) as rmssd for e
 
 <div class="figure">
 
-<img src="{{< blogdown/postref >}}index_files/figure-html/HR-1.png" alt="\label{fig:HR} The Ōura Ring records the heart rate for every 5 minutes during the entire sleep period." width="720" />
+<img src="{{< blogdown/postref >}}index_files/figure-html/HR-1.png" alt="The Ōura Ring records the heart rate for every 5 minutes during the entire sleep period." width="720" />
 <p class="caption">
 Figure 10: The Ōura Ring records the heart rate for every 5 minutes during the entire sleep period.
 </p>
@@ -204,7 +204,7 @@ In addition, during the entire activity period (from 4 am in the morning to 4 am
 
 <div class="figure">
 
-<img src="{{< blogdown/postref >}}index_files/figure-html/MET-1.png" alt="\label{fig:MET} The Ōura Ring records Metabolic Equivalent Minutes for every minutes during the entire day." width="720" />
+<img src="{{< blogdown/postref >}}index_files/figure-html/MET-1.png" alt="The Ōura Ring records Metabolic Equivalent Minutes for every minutes during the entire day." width="720" />
 <p class="caption">
 Figure 11: The Ōura Ring records Metabolic Equivalent Minutes for every minutes during the entire day.
 </p>
@@ -219,9 +219,9 @@ Figure 11: The Ōura Ring records Metabolic Equivalent Minutes for every minutes
 
 <div class="figure">
 
-<img src="{{< blogdown/postref >}}index_files/figure-html/ActivityClass-1.png" alt="\label{fig:ActivityClass} The Ōura Ring records the Activity level (**Low**, **medium** and **high** intensity as well as **non-wear**, **inactive** time and **rest**) for every 5 minutes during the entire day." width="720" />
+<img src="{{< blogdown/postref >}}index_files/figure-html/ActivityClass-1.png" alt="The Ōura Ring records the Activity level (Low, medium and high intensity as well as non-wear, inactive time and rest) for every 5 minutes during the entire day." width="720" />
 <p class="caption">
-Figure 12: The Ōura Ring records the Activity level (**Low**, **medium** and **high** intensity as well as **non-wear**, **inactive** time and **rest**) for every 5 minutes during the entire day.
+Figure 12: The Ōura Ring records the Activity level (<strong>Low</strong>, <strong>medium</strong> and <strong>high</strong> intensity as well as <strong>non-wear</strong>, <strong>inactive</strong> time and <strong>rest</strong>) for every 5 minutes during the entire day.
 </p>
 
 </div>

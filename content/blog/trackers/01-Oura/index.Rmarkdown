@@ -92,7 +92,9 @@ w <- 7.5
 h_SleepMetrics <- plot_height_beeswarm_grobs(oura_plots[["beeswarm"]][["metrics"]][["Sleep"]], w, "in")
 ```
 
-```{r SleepMetrics, echo=FALSE, fig.width = w, fig.height=h_SleepMetrics, fig.cap="\\label{fig:SleepMetrics}Distribution of daily sleep metrics measured wih the Ōura Ring, including the durations of various sleep phases (**Rem**, **Deep** and **Light**), the total sleep time (**Total**), the time in bed (**Duration**), the time awake (**Awake**), the time to fall asleep (**Onset Latency**), as well as the percentage of time asleep (**Effciency**) and the percentag of time that motion is detected (**Restless**). In addition, the average breathing rate (**Breath Average**), the average and lowest heart rate (**Hr Average** and **Hr Lowest**), the average heart rate variability (**Rmssd**) and the average skin temperature deviation (**Temperature Deviation**) are provided."}
+(ref:SleepMetrics) Distribution of daily sleep metrics measured wih the Ōura Ring, including the durations of various sleep phases (**Rem**, **Deep** and **Light**), the total sleep time (**Total**), the time in bed (**Duration**), the time awake (**Awake**), the time to fall asleep (**Onset Latency**), as well as the percentage of time asleep (**Effciency**) and the percentag of time that motion is detected (**Restless**). In addition, the average breathing rate (**Breath Average**), the average and lowest heart rate (**Hr Average** and **Hr Lowest**), the average heart rate variability (**Rmssd**) and the average skin temperature deviation (**Temperature Deviation**) are provided.
+
+```{r SleepMetrics, echo=FALSE, fig.width = w, fig.height=h_SleepMetrics, fig.cap="(ref:SleepMetrics)"}
 
 grid::grid.newpage()
 grid::grid.draw(oura_plots[["beeswarm"]][["metrics"]][["Sleep"]])
@@ -108,7 +110,9 @@ grid::grid.draw(oura_plots[["beeswarm"]][["metrics"]][["Sleep"]])
 h_ActivityMetrics <- plot_height_beeswarm_grobs(oura_plots[["beeswarm"]][["metrics"]][["Activity"]], w, "in")
 ```
 
-```{r ActivityMetrics, echo=FALSE, fig.width = w, fig.height=h_ActivityMetrics, fig.cap="\\label{fig:ActivityMetrics}Distribution of all daily activity metrics measured wih the Ōura Ring, including active and total calories (**Cal Active** and **Cal Total**), step count (**Steps**), distance moved equivalent (**Daily Movement**), the duration of **Non Wear**, **Rest** and **Inactive** time as well as active time (**Total**) with **Low**, **Medium**, or **High** intensity, and the metabilic equivelent minutes as daily average (**Average Met**) or as total during **Inactive** time or time with **Low**, **Medium** or **High** intensity activity."}
+(ref:ActivityMetrics) Distribution of all daily activity metrics measured wih the Ōura Ring, including active and total calories (**Cal Active** and **Cal Total**), step count (**Steps**), distance moved equivalent (**Daily Movement**), the duration of **Non Wear**, **Rest** and **Inactive** time as well as active time (**Total**) with **Low**, **Medium**, or **High** intensity, and the metabilic equivelent minutes as daily average (**Average Met**) or as total during **Inactive** time or time with **Low**, **Medium** or **High** intensity activity.
+
+```{r ActivityMetrics, echo=FALSE, fig.width = w, fig.height=h_ActivityMetrics, fig.cap="(ref:ActivityMetrics)"}
 grid::grid.newpage()
 grid::grid.draw(oura_plots[["beeswarm"]][["metrics"]][["Activity"]])
 ```
@@ -125,7 +129,7 @@ Based on the Sleep and Activity metrics, the Ōura Ring calculates a daily **Sle
 h_TotalScores <- plot_height_single_beeswarm(oura_plots[["beeswarm"]][["Total_Scores"]], w, "in")
 ```
 
-```{r TotalScores, echo=FALSE, fig.width = w, fig.height=h_TotalScores, fig.cap="\\label{fig:TotalScores}Distribution of daily Sleep, Activity and Readiness Scores measured wih the Ōura Ring."}
+```{r TotalScores, echo=FALSE, fig.width = w, fig.height=h_TotalScores, fig.cap="Distribution of daily Sleep, Activity and Readiness Scores measured wih the Ōura Ring."}
 oura_plots[["beeswarm"]][["Total_Scores"]]
 ```
 
@@ -139,7 +143,9 @@ oura_plots[["beeswarm"]][["Total_Scores"]]
 h_SleepScores <- plot_height_single_beeswarm(oura_plots[["beeswarm"]][["Scores"]][["Sleep"]], w, "in")
 ```
 
-```{r SleepScores, echo=FALSE, fig.width = w, fig.height=h_SleepScores, fig.cap="\\label{fig:SleepScores}The daily Sleep Score is based on the individual scores for the total amount of sleep (**Total**), the amount of **REM** and **Deep** sleep, the percentage sleep from the time in bed **Efficiency**, the time it takes to fall asleep (**Latency**), the amount of restlessness (**Disturbances**) and the sleep timing (**Alignment**)."}
+(ref:SleepScores) The daily Sleep Score is based on the individual scores for the total amount of sleep (**Total**), the amount of **REM** and **Deep** sleep, the percentage sleep from the time in bed **Efficiency**, the time it takes to fall asleep (**Latency**), the amount of restlessness (**Disturbances**) and the sleep timing (**Alignment**).
+
+```{r SleepScores, echo=FALSE, fig.width = w, fig.height=h_SleepScores, fig.cap="(ref:SleepScores)"}
 oura_plots[["beeswarm"]][["Scores"]][["Sleep"]]
 ```
 
@@ -153,8 +159,9 @@ oura_plots[["beeswarm"]][["Scores"]][["Sleep"]]
 h_SleepScores <- plot_height_single_beeswarm(oura_plots[["beeswarm"]][["Scores"]][["Activity"]], w, "in")
 ```
 
+(ref:ActivityScores) The daily Activity Score is based on the amount of **Recovery Time**, the amount and regularity of physical exercise (**Training Volume** and **Training Frequency**) and the frequency of reaching the daily activity goals (**Meet Daily Targets**) during the last seven days. In addition , the activity scores take into account the avoidance of (long periods of) inactivity (**Stay Active** and **Move Every Hour**) during the last 24 h.
 
-```{r ActivityScores, echo=FALSE, fig.width = w, fig.height=h_SleepScores, fig.cap="\\label{fig:ActivityScores}The daily Activity Score is based on the amount of **Recovery Time**, the amount and regularity of physical exercise (**Training Volume** and **Training Frequency**) and the frequency of reaching the daily activity goals (**Meet Daily Targets**) during the last seven days. In addition , the activity scores take into account the avoidance of (long periods of) inactivity (**Stay Active** and **Move Every Hour**) during the last 24 h ."}
+```{r ActivityScores, echo=FALSE, fig.width = w, fig.height=h_SleepScores, fig.cap="(ref:ActivityScores)"}
 oura_plots[["beeswarm"]][["Scores"]][["Activity"]]
 ```
 
@@ -168,8 +175,9 @@ oura_plots[["beeswarm"]][["Scores"]][["Activity"]]
 h_Readiness <- plot_height_single_beeswarm(oura_plots[["beeswarm"]][["Scores"]][["Readiness"]], w, "in")
 ```
 
+(ref:ReadinessScores) The daily Readiness Score is based on the activity level of the **Previous Day** as well as the sleep quality of the **Previous Night**. In addition, the readiness score takes into account the deviation of the nightly values for HRV (**HRV Balance**), resting heart rate (**resting HR**), and Skin Temperature (**Temperature**) compared to their normal ranges. The readiness score furthermore measures the balance between low, medium and high intensity activities (**Activity Balance**), the long term sleep pattern (**Sleep Balance**) and how long it takes for the resting heart rate to stabilize during the night (**Recovery Index**).
 
-```{r ReadinessScores, echo=FALSE, fig.width = w, fig.height=h_Readiness, fig.cap="\\label{fig:ReadinessScores}The daily Readiness Score is based on the activity level of the **Previous Day** as well as the sleep quality of the **Previous Night**. In addition, the readiness score takes into account the deviation of the nightly values for HRV (**HRV Balance**), resting heart rate (**resting HR**), and Skin Temperature (**Temperature**) compared to their normal ranges. The readiness score furthermore measures the balance between low, medium and high intensity activities (**Activity Balance**), the long term sleep pattern (**Sleep Balance**) and how long it takes for the resting heart rate to stabilize during the night (**Recovery Index**)."}
+```{r ReadinessScores, echo=FALSE, fig.width = w, fig.height=h_Readiness, fig.cap="(ref:ReadinessScores)"}
 oura_plots[["beeswarm"]][["Scores"]][["Readiness"]]
 ```
 
@@ -182,7 +190,9 @@ oura_plots[["beeswarm"]][["Scores"]][["Readiness"]]
 
 In addition to the daily aggregates, the Ōura Ring data also consists of a few time-related values (Fig. \@ref(fig:SleepTimes)).
 
-```{r SleepTimes, echo=FALSE, fig.width = w, fig.height=5, fig.cap="\\label{fig:SleepTimes} The Ōura Ring data includes timestamps for the time at which you go to bed (**Bedtime Start**), the time that you get up (**Bedtime End**) and the time in the middle of your sleep (**Midpoint**),used to calculate the Alignment score for sleep timing."}
+(ref:SleepTimes) The Ōura Ring data includes timestamps for the time at which you go to bed (**Bedtime Start**), the time that you get up (**Bedtime End**) and the time in the middle of your sleep (**Midpoint**),used to calculate the Alignment score for sleep timing.
+
+```{r SleepTimes, echo=FALSE, fig.width = w, fig.height=5, fig.cap="(ref:SleepTimes)"}
 
 add.logo <- function(p, img, plot_w = NA, plot_h = NA){
   
@@ -237,7 +247,9 @@ For a few metrics the Ōura Ring data provides data with higher granularity. Dur
 
 ### Hypnogram {.panel-name}
 
-```{r Hypnogram, echo=FALSE, fig.width = w, fig.height=5, fig.cap="\\label{fig:Hypnogram} The Ōura Ring records the sleep phase classification (**Awake**, **Deep** sleep, **Light** sleep or **REM** sleep) for every 5 minutes during the entire sleep period."}
+(ref:Hypnogram) The Ōura Ring records the sleep phase classification (**Awake**, **Deep** sleep, **Light** sleep or **REM** sleep) for every 5 minutes during the entire sleep period.
+
+```{r Hypnogram, echo=FALSE, fig.width = w, fig.height=5, fig.cap="(ref:Hypnogram)"}
 oura_plots[["timeseries"]][["categorical"]][["SP"]]
 ```
 
@@ -247,7 +259,7 @@ oura_plots[["timeseries"]][["categorical"]][["SP"]]
 
 ### Heart Rate Variability {.panel-name}
 
-```{r HRV, echo=FALSE, fig.width = w, fig.height=5, fig.cap="\\label{fig:HRV} The Ōura Ring records the heart rate variability (HRV) as rmssd for every 5 minutes during the entire sleep period."}
+```{r HRV, echo=FALSE, fig.width = w, fig.height=5, fig.cap="The Ōura Ring records the heart rate variability (HRV) as rmssd for every 5 minutes during the entire sleep period."}
 oura_plots[["timeseries"]][["numeric"]][["HRV"]]
 ```
 
@@ -258,7 +270,7 @@ oura_plots[["timeseries"]][["numeric"]][["HRV"]]
 
 ### Heart Rate {.panel-name}
 
-```{r HR, echo=FALSE, fig.width = w, fig.height=5, fig.cap="\\label{fig:HR} The Ōura Ring records the heart rate for every 5 minutes during the entire sleep period."}
+```{r HR, echo=FALSE, fig.width = w, fig.height=5, fig.cap="The Ōura Ring records the heart rate for every 5 minutes during the entire sleep period."}
 oura_plots[["timeseries"]][["numeric"]][["HR"]]
 ```
 
@@ -277,7 +289,7 @@ In addition, during the entire activity period (from 4 am in the morning to 4 am
 
 ### Metabolic Equivalent Minutes {.panel-name}
 
-```{r MET, echo=FALSE, fig.width = w, fig.height=5, fig.cap="\\label{fig:MET} The Ōura Ring records Metabolic Equivalent Minutes for every minutes during the entire day."}
+```{r MET, echo=FALSE, fig.width = w, fig.height=5, fig.cap="The Ōura Ring records Metabolic Equivalent Minutes for every minutes during the entire day."}
 oura_plots[["timeseries"]][["numeric"]][["MET"]]
 ```
 
@@ -287,7 +299,9 @@ oura_plots[["timeseries"]][["numeric"]][["MET"]]
 
 ### Activity Level {.panel-name}
 
-```{r ActivityClass, echo=FALSE, fig.width = w, fig.height=5, fig.cap="\\label{fig:ActivityClass} The Ōura Ring records the Activity level (**Low**, **medium** and **high** intensity as well as **non-wear**, **inactive** time and **rest**) for every 5 minutes during the entire day."}
+(ref:ActivityClass) The Ōura Ring records the Activity level (**Low**, **medium** and **high** intensity as well as **non-wear**, **inactive** time and **rest**) for every 5 minutes during the entire day.
+
+```{r ActivityClass, echo=FALSE, fig.width = w, fig.height=5, fig.cap="(ref:ActivityClass)"}
 oura_plots[["timeseries"]][["categorical"]][["Activity"]]
 ```
 
