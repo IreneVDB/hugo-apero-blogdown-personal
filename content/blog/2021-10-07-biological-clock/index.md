@@ -1,16 +1,15 @@
 ---
 title: "The Biological Clock and the Circadian Rhythm"
-subtitle: "Like the clock at home ticks, ticks it nowhere!"
-excerpt: "Everything about the circadian rhythm, chronobiology, and why it's important to align your social and biological clocks."
-date: 2021-09-25
 author: "Irene van den Broek"
-draft: false
-# layout options: single, single-sidebar
+date: "2021-09-25"
+excerpt: Everything about the circadian rhythm, chronobiology, and why it's important
+  to align your social and biological clocks.
+subtitle: Like the clock at home ticks, ticks it nowhere!
+draft: no
 layout: single
 categories:
 - Body
 - Health & Science
-
 ---
 
 <style>body {text-align: justify}</style>
