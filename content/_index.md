@@ -1,7 +1,7 @@
 ---
-title: "Irene van den Broek"
-subtitle: "Data Visualization and Quantified Self Enthusiast"
-description: "I am a freelance data visualization designer and university lecturer passionate about health, tech and teaching. You R Are What You Measure is my passion project to analyze and visualize my Health & Habits using apps, wearable devices and...R!"
+title: "You R What You Measure"
+subtitle: "Tracking and visualizing Health & Habits"
+description: "I am Irene van den Broek. You R Are What You Measure is my passion project where I track, analyze and visualize my Health & Habits using apps, wearable devices and...R! Here I'll share the <bold>what</bold>, why and how, including lots of R graphs and code"
 images:
   - img/sequoia.jpeg
 image_left: false
