@@ -1,12 +1,13 @@
 ---
 title: "You R What You Measure"
 subtitle: "Tracking and visualizing Health & Habits"
-description: "I am Irene van den Broek. You R Are What You Measure is my passion project where I track, analyze and visualize my Health & Habits using apps, wearable devices and...R! Here I'll share the <bold>what</bold>, why and how, including lots of R graphs and code"
+description: "Hi! My name is Irene van den Broek. I am a data visualization and quantified self enthusiast. You R Are What You Measure is my passion project where I'll share the what, why and how, including lots of R graphs and code, of tracking, analyzing and visualizing Health & Habits using apps, wearable devices and...R."
 images:
   - img/sequoia.jpeg
+  - img/logo_8areas.png
 image_left: false
 text_align_left: true
-show_social_links: true # specify social accounts in site config
+show_social_links: false # specify social accounts in site config
 show_action_link: true
 action_link: /about
 action_label: "More About Me &rarr;"
