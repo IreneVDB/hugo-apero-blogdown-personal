@@ -1,10 +1,15 @@
 ---
 ## Configure page content in wide column
-title: "Hi there! I'm Irene." 
+title: |
+  <img src="/img/logo_transparent.png" width="10%;" style="float:left; margin:10px;"/>
+  You R what you measure 
 number_featured: 2 # pulling from mainSections in config.toml
 number_categories: 4 # set to zero to exclude
 show_intro: true
 intro: |
+  Tracking and visualizing <b>H</b>ealth & <b>H</b>abits
+  <img src="/img/logo_8areas.png"/>
+
   I am a **data visualization** and **quantified self** enthusiast with an interest in **digital health** and **precision medicine**. As a former professional cyclist with a PhD in biomarker research, I currently combine a part time job as a university teacher with a freelance business and passion project **‘You R What You Measure’**. <p>
   
   <img src="/img/logo_transparent.png" width="20%;" style="float:left; margin:10px;"/>

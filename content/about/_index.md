@@ -1,8 +1,8 @@
 ---
-title: "Irene van den Broek"
+title: "Hi there! I am Irene."
 description: |
-  Data Visualization and Quantified Self Enthusiast
-show_header: false
+  Waarom staat dit nergens? Data Visualization and Quantified Self Enthusiast
+show_header: true
 sidebar_left: true
 # Keep this! Do not edit.
 cascade:
