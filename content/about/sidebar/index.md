@@ -6,7 +6,7 @@ avatar_shape: circle # circle, square, rounded
 show_social_links: true 
 show_audio_link: false
 # audio_link_label: "How to say my name"
-link_list_label: "What else...?"
+link_list_label: "More about me..."
 link_list:
  - name: Publications
    url: https://www.ncbi.nlm.nih.gov/myncbi/irene.van%20den%20broek.1/bibliography/public/
