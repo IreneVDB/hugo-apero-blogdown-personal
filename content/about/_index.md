@@ -3,7 +3,7 @@ title: "Hi there! I am Irene."
 description: |
   Waarom staat dit nergens? Data Visualization and Quantified Self Enthusiast
 show_header: true
-sidebar_left: true
+sidebar_left: false
 # Keep this! Do not edit.
 cascade:
   headless: true
