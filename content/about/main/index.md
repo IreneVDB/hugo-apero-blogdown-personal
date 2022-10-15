@@ -1,36 +1,45 @@
 ---
 ## Configure page content in wide column
-title: |
-  <img src="/img/logo_transparent.png" width="10%;" style="float:left; margin:10px;"/>
-  You R what you measure 
+title: You <i class="fab fa-r-project"></i> what you measure
 number_featured: 2 # pulling from mainSections in config.toml
-number_categories: 4 # set to zero to exclude
+number_categories: 5 # set to zero to exclude
 show_intro: true
 intro: |
-  Tracking and visualizing <b>H</b>ealth & <b>H</b>abits
-  <img src="/img/logo_8areas.png"/>
-
-  I am a **data visualization** and **quantified self** enthusiast with an interest in **digital health** and **precision medicine**. As a former professional cyclist with a PhD in biomarker research, I currently combine a part time job as a university teacher with a freelance business and passion project **‘You R What You Measure’**. <p>
-  
+  Here,
   <img src="/img/logo_transparent.png" width="20%;" style="float:left; margin:10px;"/>
+  I share the <i>what</i>, <i>why</i> and <i>how</i> of tracking, analyzing and visualizing [Sleep](/categories/sleep/) <i class="fas fa-bed"></i>,
+  [Activity](/categories/activity) <i class="fas fa-running"></i>,
+  <b>F</b>ood <i class="fas fa-apple-alt"></i>,
+  <b>M</b>ood <i class="far fa-smile"></i>,
+  [Body](/categories/body/) <i class="fas fa-heartbeat"></i>,
+  <b>B</b>rain <i class="fas fa-brain"></i>,
+  [Environment](/categories/environment/) <i class="fas fa-leaf"></i>, and
+  [Habits](/categories/habits/) <i class="far fa-clock"></i>using apps, wearable devices and the <i class="fab fa-r-project"></i> programming language.
+  
+  Watch my [talk](/talk/rmedicine2021/) at the R/Medicine conference 2021 for an introduction!
+  <div class="shareagain" style="min-width:100px; margin:1em auto;">
+  <iframe src="https://irenevdb.github.io/RMedicine2021" width="352"   height="198" style="border:2px solid currentColor;" loading="lazy" allowfullscreen></iframe>
+  <script>fitvids('.shareagain', {players: 'iframe'});</script>
+  </div>
+  <hr>
 
-   Using apps, sensors and wearable devices, I collect and visualize data about my 
-   Sleep <i class="fas fa-bed"></i>,
-  Activity <i class="fas fa-running"></i>,
-  Food <i class="fas fa-apple-alt"></i>,
-  Mood <i class="far fa-smile"></i>,
-  Body <i class="fas fa-heartbeat"></i>,
-  Brain <i class="fas fa-brain"></i>,
-  Environment <i class="fas fa-leaf"></i>, and
-  Habits <i class="far fa-clock"></i>. <p>
+  As a freelancer, I am available for:
   
-  Here, I'll share my insights from **self-tracking** as well as my **R** and **DataViz** tinkering! <p>
+  <i class="fas fa-chalkboard-teacher" style="font-size:xx-large"></i>
+  &emsp;**Workshops** (from 2 hour to full-day) about: 
+  <small>
+  - Visual communication in scientific research.
+  - Design principles for effective data communication.
+  - Leverage your data visualization with <i class="fab fa-r-project"></i></small>.
+   
+  <i class="fas fa-chart-bar" style="font-size:xx-large"></i>
+  &emsp; Creating (interactive) **data visualizations** or **web applications** to support (sensor-based) studies related to health, lifestyle or living environment.
   
-    - I give **presentations** and **workshops** about self-tracking, data visualization and/or the R programming language (see [Talks](/talk/) and [Blog](/blog/)). 
-    - I create (interactive) **data visualizations** or **web applications** to support (sensor-based) studies and citizen science projects related to health, lifestyle or living environment (see [Projects](/project/)). <p> 
+  <i class="fas fa-heartbeat" style="font-size:xx-large"></i>
+  &emsp; **Presentations** about tracking health and habits using apps, sensors and wearable devices.
+
   
-  I love to talk about my passions and share my insights with others!
-  Please <i class="fas fa-envelope"></i> [contact me](/contact/) to get in touch or introduce yourself!
+  Please <i class="fas fa-envelope"></i> [contact me](/contact/) to get in   touch or introduce yourself. I'd love to hear from you!
 
 show_outro: true
 outro: |
