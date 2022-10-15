@@ -1,5 +1,5 @@
 ---
-title: You R What You Measure Blog
+title: You R What You Measure
 description: |
   Posts about tracking, analyzing and visualizing **Health** & **Habits**.
 author: "Irene van den Broek"
@@ -11,7 +11,7 @@ layout: list-sidebar # list, list-sidebar, list-grid
 
 # for list-sidebar layout
 sidebar: 
-  title: You R What You Measure Blog
+  title: You R What You Measure
   description: |
     Posts about tracking, analyzing and visualizing **Health** & **Habits**.
     <p> 
