@@ -2,7 +2,7 @@
 title: "You R What You Measure"
 subtitle: "Tracking and visualizing Health & Habits"
 description: |
-  Hi! My name is Irene van den Broek. I am a data visualization and quantified self enthusiast. <b>You R What You Measure</b> is my passion project where I'll share the <i>what</i>, <i>why</i> and <i>how</i> of tracking, analyzing and visualizing <b><big>H</big></b>ealth & <b><big>H</big></b>abits using apps, wearable devices and...<i class="fab fa-r-project"></i>.
+  Hi! My name is Irene van den Broek. I am a data visualization and quantified self enthusiast. <b style="color:#1965ff">You R What You Measure</b> is my passion project where I share the <i>what</i>, <i>why</i> and <i>how</i> of tracking, analyzing and visualizing <b><big>H</big></b>ealth & <b><big>H</big></b>abits using apps, wearable devices and the <i class="fab fa-r-project" style="font-size:xx-large;"></i> programming language.
 images:
   - img/logo_8areas_t.png
 image_left: false
