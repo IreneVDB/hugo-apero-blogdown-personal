@@ -32,7 +32,7 @@ tags: []
 projects: []
 ---
 
-![Image of first slide](featured.png)
+{{< youtube AUgkBG67S20 >}}
 
 ## Abstract
 
