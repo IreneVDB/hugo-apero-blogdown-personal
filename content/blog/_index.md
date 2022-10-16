@@ -1,11 +1,14 @@
 ---
-title: You R What You Measure
+title: Technology
 description: |
-  Posts about tracking, analyzing and visualizing **Health** & **Habits**.
+
+  <b style="font-size:x-large; color:#0091e6;"> You <i class="fab fa-r-project"></i> what you measure </b><br>
+  Reviews and descriptions of apps, wearables and sensors for tracking **H**ealth & **H**abits. Including descriptions of how to collect and analyze health data using <i class="fab fa-r-project"></i>.
 author: "Irene van den Broek"
 show_post_thumbnail: true
 show_author_byline: true
 show_post_date: true
+
 # for listing page layout
 layout: list-sidebar # list, list-sidebar, list-grid
 
@@ -15,6 +18,7 @@ sidebar:
   description: |
     Posts about tracking, analyzing and visualizing **Health** & **Habits**.
     <p> 
+    
     <i class="fas fa-bed"></i> SLEEP: <br>
     
     <img src="/img/app_logos/Oura.png" width="10%" style="border-radius:10%; margin:5px;"/> 
@@ -70,7 +74,7 @@ sidebar:
  
   author: ""
   text_link_label: ""
-  text_link_url: /project/
+  text_link_url: ""
   show_sidebar_adunit: false # show ad container
 
 # set up common front matter for all pages inside blog/
@@ -82,7 +86,7 @@ cascade:
   # for single-sidebar layout
   sidebar:
     text_link_label: View recent posts
-    text_link_url: /blog/
+    text_link_url: /trackers/
     show_sidebar_adunit: false # show ad container
 ---
 
