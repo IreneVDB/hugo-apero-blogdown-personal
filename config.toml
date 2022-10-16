@@ -30,11 +30,11 @@ enableEmoji = true
 [params]
   orgName = "Irene van den Broek"
   orgLocal = ""
-  description = "You R What You Measure: Data Visualizations for Insights in Health and Habits"
+  description = "You R What You Measure: The what, why and how of analyzing and visualing Health and Habits"
   # favicon = "/img/favicon.ico"
   favicon = "/img/logo_resize_32.png"
   logo = "/img/logo_transparent.png"
-  mainSections = ["blog", "project", "talk"]
+  mainSections = ["dataviz", "talk", "blog"] # deze moeten gelijk zijn aan folder namen
   navallcaps = true
   # show/hide social icons in site header & footer
   # configure social icons and links below in [[params.social]]
@@ -115,24 +115,24 @@ enableEmoji = true
 
 [menu]
   [[menu.header]]
-    name = "About"
+    name = "About me"
     title = "About me"
     url = "/about/"
     weight = 1
   [[menu.header]]
-    name = "Projects"
-    title = "Project Portfolio"
-    url = "/project/"
+    name = "dataviz" # verandert de naam in de menubalk
+    title = "Data visualizations"
+    url = "/dataviz/" #als ik dit verander in dataviz dan ga je naar /dataviz folder en dan is het geen grid list meer
     weight = 2
   [[menu.header]]
-    name = "Talks"
-    title = "Talks"
-    url = "/talk/"
+    name = "trackers" # hier trackers en foutmelding
+    title = "iets geks" # Op ABOUT ME page zie ik "Technology"; dit staat in index.md file van trackers folder
+    url = "/blog/"
     weight = 3
   [[menu.header]]
-    name = "Blog"
-    title = "Blog"
-    url = "/blog/"
+    name = "other"
+    title = "Health and Science"
+    url = "/talk/" #dit haalt de informatie uit de /blog/ folder!
     weight = 4
     
   # Configure footer  
