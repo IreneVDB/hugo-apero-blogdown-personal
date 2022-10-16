@@ -1,10 +1,12 @@
 ---
-title: Talks & Workshops
+title: Health & Science
 description: |
-  An overview of talks and workshops I have presented with links to recordings, slides and other resources.
+
+    <b style="font-size:x-large; color:#0091e6;"> You <i class="fab fa-r-project"></i> what you measure </b><br>
+    Posts about the why and how of tracking **H**ealth and **H**abits. Including talks, reviews of scientific literature, and descriptions of specific health metrics.
 author: "Irene van den Broek"
 show_post_thumbnail: true
-show_author_byline: false
+show_author_byline: true
 show_post_date: true
 show_post_time: true
 # for listing page layout
@@ -16,7 +18,6 @@ sidebar:
   description: |
     This is a list for your talks, workshops, or 
     other events with a time, date, and place. 
-    Even this sidebar offers a ton of customizations.
     
     Check out the _index.md file in the /talk folder 
     to edit this content. 
@@ -34,8 +35,8 @@ cascade:
   show_disqus_comments: false # see disqusShortname in site config
   # for single-sidebar layout
   sidebar:
-    text_link_label: View recent talks
-    text_link_url: /talk/
+    text_link_label: View all
+    text_link_url: /blog/
     show_sidebar_adunit: false # show ad container
 ---
 
