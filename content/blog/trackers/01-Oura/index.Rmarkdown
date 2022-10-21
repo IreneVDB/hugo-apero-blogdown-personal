@@ -5,7 +5,8 @@ subtitle: "A ring that measures sleep, activity and readiness"
 excerpt: "What is the Ōura Ring and what can you do with the data? An overview of my experiences with the Ōura Ring for tracking **Sleep**, **Activity** and **Readiness**. Accompanied by instructions and visualizations on how to access and analyze your Ōura Ring data in R"
 date: 2021-09-26
 draft: false
-categories: [Sleep, Activity, Oura Ring]
+categories: [Sleep, Activity]
+tags: [Oura Ring]
 
 ---
 
