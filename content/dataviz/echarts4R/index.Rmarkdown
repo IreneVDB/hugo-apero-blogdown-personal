@@ -5,7 +5,7 @@ excerpt: "I tried echarts4r, an R package that interfaces with the JavaScript ec
 date: 2020-08-01
 draft: false
 author: "Irene van den Broek"
-tags: [Oura Ring, R]
+tags: [Oura Ring, echarts4r]
 categories: [R Packages, Interactive charts]
 layout: "single"
 links:

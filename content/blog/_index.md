@@ -1,16 +1,15 @@
 ---
-title: Technology
+title: Trackers
 description: |
-
   <b style="font-size:x-large; color:#0091e6;"> You <i class="fab fa-r-project"></i> what you measure </b><br>
   Reviews and descriptions of apps, wearables and sensors for tracking **H**ealth & **H**abits. Including descriptions of how to collect and analyze health data using <i class="fab fa-r-project"></i>.
 author: "Irene van den Broek"
 show_post_thumbnail: true
-show_author_byline: true
+show_author_byline: false
 show_post_date: true
 
 # for listing page layout
-layout: list-sidebar # list, list-sidebar, list-grid
+layout: list-grid # list, list-sidebar, list-grid
 
 # for list-sidebar layout
 sidebar: 
