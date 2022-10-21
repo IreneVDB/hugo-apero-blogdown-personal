@@ -1,7 +1,7 @@
 ---
-title: "Bucketlist"
-subtitle: "Visualization of my 100 item bucketlist."
-excerpt: "Visualization of my 100 item bucketlist"
+title: "Timeseries"
+subtitle: "with echarts4R."
+excerpt: "Iinteractive trend plot for timeseries data"
 date: 2019-07-01
 author: "Irene van den Broek"
 draft: true
@@ -9,6 +9,9 @@ image:
   caption: ''
   focal_point: Smart
 tags:
+  - R Packages
+  - Interactive charts
+  - echarts4R
 categories:
 layout: single
 links:

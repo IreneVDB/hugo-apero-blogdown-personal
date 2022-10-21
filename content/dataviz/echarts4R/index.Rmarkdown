@@ -6,7 +6,7 @@ date: 2020-08-01
 draft: false
 author: "Irene van den Broek"
 tags: [Oura Ring, R]
-categories: 
+categories: [R Packages, Interactive charts]
 layout: "single"
 links:
 - icon: github

@@ -10,6 +10,7 @@ image:
   focal_point: Smart
 tags:
 categories:
+  - Habits
 layout: single
 links:
 - icon: link

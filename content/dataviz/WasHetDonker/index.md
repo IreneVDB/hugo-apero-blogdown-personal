@@ -6,10 +6,10 @@ date: 2021-03-01
 author: "Irene van den Broek"
 draft: false
 tags:
-  - Environment
+  - Light Pollution
+  - Heatmap
 categories:
-  - R
-  - DataViz
+  - Environment
 layout: single
 links:
 - icon: link

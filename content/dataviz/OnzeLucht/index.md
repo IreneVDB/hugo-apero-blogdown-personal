@@ -9,11 +9,12 @@ image:
   caption: ''
   focal_point: Smart
 tags:
-  - RShiny
+  - Shiny
+  - Air Quality
+  - Heatmap
 categories:
-  - RShiny
-  - R
   - Environment
+  - Interactive charts
 layout: single
 links:
 - icon: link

@@ -9,7 +9,11 @@ image:
   caption: ''
   focal_point: Smart
 tags:
+  - R Packages
+  - Reactable
 categories:
+  - Habits
+  - Interactive charts
 layout: single
 links:
 - icon: file

@@ -9,7 +9,12 @@ image:
   caption: ''
   focal_point: Smart
 tags:
+  - R Packages
+  - Interactive charts
+  - Reactable
 categories:
+  - Sleep
+  - Activity
 layout: single
 links:
 - icon: file
