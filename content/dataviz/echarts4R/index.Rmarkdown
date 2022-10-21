@@ -1,0 +1,141 @@
+---
+title: "echarts4r"
+subtitle: "Creating interactive web charts in R"
+excerpt: "I tried echarts4r, an R package that interfaces with the JavaScript echarts library, to visualize my Ōura Ring data using various echarts. Echarts4r appeared to be very intuitive and versatile and allowed me to quickly and easily create several good-looking, fancy charts that were ready for the web!" 
+date: 2020-08-01
+draft: false
+author: "Irene van den Broek"
+tags: [Oura Ring, R]
+categories: 
+layout: "single"
+links:
+- icon: github
+  icon_pack: fab
+  name: Code
+  url: https://github.com/IreneVDB/OuraRing/tree/main/src/echarts4r
+---
+
+<style>body {text-align: justify}</style>
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, 
+                      warning = FALSE,
+                      message = FALSE,
+                      fig.width = 7)
+
+library(here)
+library(tidyverse)
+library(lubridate)
+library(echarts4r)
+library(htmlwidgets)
+library(htmltools)
+library(pins)
+
+# create the echarts:
+# get most recent oura data:
+oura <- pin_get("oura")
+# run the codes to get functions to create plots
+source("../../../../QuantifiedSelf/devices/OuraRing/src/echarts4r/src/e_gauge_Scores.R")
+source("../../../../QuantifiedSelf/devices/OuraRing/src/echarts4r/src/e_bar_Scores.R")
+source("../../../../QuantifiedSelf/devices/OuraRing/src/echarts4r/src/e_pie.R")
+source("../../../../QuantifiedSelf/devices/OuraRing/src/echarts4r/src/e_stacked_bar.R")
+source("../../../../QuantifiedSelf/devices/OuraRing/src/echarts4r/src/e_calendar.R")
+source("../../../../QuantifiedSelf/devices/OuraRing/src/echarts4r/src/e_trend.R")
+
+```
+
+<a href="https://echarts4r.john-coene.com">
+<img src="https://echarts4r.john-coene.com/reference/figures/logo.png" ahref=width="25%" style="float:left; margin:10px;"/>
+</a>
+
+From the various _html widgets_ (R packages that interface with JavaScript visualization libraries), I immediately fell for the the [`{echarts4r}`](https://echarts4r.john-coene.com) package created by John Coene, because of the detailed documentation, the numerous and simple code examples, and the wide variety of possible chart types. I gave it a try and relatively easily created several interactive charts with this intuitive and versatile R package!
+
+## Gauges and horizontal bar charts
+
+The gauges represent my total Sleep, Activity and Readiness Scores and are created with the `e_gauge()` function. To get multiple gauges in a single chart, you need to specify the center and radius for each gauge individually. Using the `e_grid()` function, you can adjust the sizes of the figure and margins.
+
+The individual scores used to calculate the total Sleep, Activity and Readiness Scores are visualized in bar charts created with the `e_bar()` function. The bar charts are easily flipped horizontally using the `e_flips_coords()` function, whereas the `e_visual_map()` function is used to highlight the scores below 60%.
+
+```{r e_gauge, echo=FALSE}
+e_gauge <- make.egauge.oura(r="42%")
+e_bar_sleep <- make.e_bar.scores("Sleep", 0.55)  
+e_bar_activity <- make.e_bar.scores("Activity", 0.65)
+e_bar_readiness <- make.e_bar.scores("Readiness", 0.75)
+
+div(style="background-color:#FFFFFF;",
+    span(e_gauge),
+    span(e_bar_sleep, style="display:inline-block; width:31%"),
+    span(e_bar_activity, style="display:inline-block; width:31%"),
+    span(e_bar_readiness, style="display:inline-block; width:31%")
+    )
+```
+
+## Pie and Donut charts
+
+The pie and donut charts are created with the `e_pie()` function, using `e_color()` to define the colors and `e_tooltip()` to define the text that appears when hoovering over the visual. A donut chart is easily achieved by setting the inner radius of the radius argument within the `e_pie()` function.
+
+```{r e_pie, echo=FALSE}
+e_pie_sleep <- make.pie.sleep(r_in = 0, r_out = "50%")
+e_pie_activity <- make.pie.activity(r_in = "20%", r_out = "50%")
+
+div(style="background-color:#FFFFFF;",
+    span(e_pie_sleep, style="display:inline-block; width:45%"),
+    span(e_pie_activity, style="display:inline-block; width:45%")
+    )
+```
+
+## Stacked bar charts
+
+The stacked bar charts are created by multiple calls of the `e_bar()` functions. With `e_datazoom()` a zoom panel is added that enables to zoom in along the entire time serie. The`e_legend()` function was useful to adjust the legend.
+
+```{r e_stacked_bar, echo=FALSE}
+e_stacked_sleep <- make.stacked.bar.sleep()
+e_stacked_activity <- make.stacked.bar.activity()
+
+div(e_stacked_sleep,style="background-color:#FFFFFF;")
+div(e_stacked_activity,style="background-color:#FFFFFF;")
+
+```
+
+
+## Line charts with normal ranges
+
+The `e_bar()` function was also applied to create the bar charts below, showing the daily trends of [HRV](/talk/2022-02-20-hrv/) during sleep and step counts. With the `e_line()` function, a line showing the 7-day rolling average was added. To adjust the colors of the bars that were either 1 standard deviation below or above the 7-day rolling average, the `e_band2()` in combination with the `e_add_nested()` functions were helpful. The labels for the mean and 7-day rolling mean were added using the `e_mark_point()` function.
+
+```{r e_trend, echo=FALSE}
+e_trend_sleep <- Make.trend(
+  oura[["Sleep"]], column = sleep.rmssd, ylab = "HRV (msec)",
+                title = "Average Heart Rate Variability (rmssd) during sleep",
+                subtitle = "Measured with the Oura Ring",
+                hue = 0.55, ymax = 180, ymin = 60, top_mar = 110,
+           plot_width = 600, plot_height = 300)
+
+e_trend_activity <- Make.trend(
+  oura[["Activity"]], column = activity.steps, ylab = "Steps (xx)",
+  title = "Daily Step Count",
+  subtitle = "Measured with the Oura Ring",
+  hue = 0.65, ymax = 40000, ymin = 0, top_mar = 110,
+  plot_width = 600, plot_height = 300)
+
+div(e_trend_sleep,style="background-color:#FFFFFF;")
+div(e_trend_activity,style="background-color:#FFFFFF;")
+
+```
+
+## Heatmap calendar
+
+The `e_calendar()` function quickly creates a heatmap in the shape of a calendar. The colors were defined using the `e_visual_map()` function.
+
+```{r e_calendar, echo=FALSE}
+e_calendar_sleep <- make.hm.cal(
+  oura[["Sleep"]], "sleep.rmssd", hue = 0.55, min = 75, max = 125,
+  title = "Mean HRV over the Years",
+  subtitle = "Measured with Oura Ring") %>%
+  e_heatmap(sleep.rmssd, coord_system = "calendar") 
+
+div(e_calendar_sleep,style="background-color:#FFFFFF;")
+
+```
+
+## Conclusion
+Whenever I wondered "Could I _do_, _modify_ or _add_ this?", the answer always was "Yes, you can!". Often by simply looking at the code examples on the [echarts4r website](), but otherwise by searching the extensive JavaScript [echarts documentation](https://echarts.apache.org). Luckily, `{echarts4r}` seemed to have an easy _wrapper_ function for most (if not all) chart types. And when I couldn't find a wrapper function, I could typically replace the `:` or `{...}` in the JavaScript example with `=` or `list(...)` in my R code and voilà...it worked!
