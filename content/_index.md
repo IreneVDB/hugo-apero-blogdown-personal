@@ -10,7 +10,7 @@ text_align_left: true
 show_social_links: false # specify social accounts in site config
 show_action_link: true
 action_link: /about
-action_label: "More About Me &rarr;"
+action_label: "Read more &rarr;"
 action_type: text # text, button
 type: home
 ---

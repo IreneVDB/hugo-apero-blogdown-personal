@@ -115,24 +115,24 @@ enableEmoji = true
 
 [menu]
   [[menu.header]]
-    name = "About me"
-    title = "About me"
+    name = "About"
+    title = "About"
     url = "/about/"
     weight = 1
   [[menu.header]]
     name = "dataviz" # verandert de naam in de menubalk
     title = "Data visualizations"
-    url = "/dataviz/" #als ik dit verander in dataviz dan ga je naar /dataviz folder en dan is het geen grid list meer
+    url = "/dataviz/" 
     weight = 2
   [[menu.header]]
-    name = "trackers" # hier trackers en foutmelding
-    title = "iets geks" # Op ABOUT ME page zie ik "Technology"; dit staat in index.md file van trackers folder
+    name = "trackers" 
+    title = "iets geks" 
     url = "/blog/"
     weight = 3
   [[menu.header]]
     name = "other"
     title = "Health and Science"
-    url = "/talk/" #dit haalt de informatie uit de /blog/ folder!
+    url = "/talk/" 
     weight = 4
     
   # Configure footer  
