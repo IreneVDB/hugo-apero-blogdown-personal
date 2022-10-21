@@ -1,7 +1,7 @@
 ---
 title: "echarts4r"
 subtitle: "Creating interactive web charts in R"
-excerpt: "I tried echarts4r, an R package that interfaces with the JavaScript echarts library, to visualize my Ōura Ring data using various echarts. Echarts4r appeared to be very intuitive and versatile and allowed me to quickly and easily create several good-looking, fancy charts that were ready for the web!" 
+excerpt: "I tried echarts4r, an R package that interfaces with the JavaScript echarts library, to visualize my Ōura Ring data. Echarts4r appeared to be very intuitive and versatile and allowed me to quickly and easily create several good-looking, fancy charts that were ready for the web!" 
 date: 2020-08-01
 draft: false
 author: "Irene van den Broek"
