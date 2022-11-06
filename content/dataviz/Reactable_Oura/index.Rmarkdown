@@ -3,7 +3,7 @@ title: "Reactable and reactablefmtr"
 subtitle: "R packages for creating interactive data tables"
 excerpt: "I tested the {reactable} package to create an interactive table for my sleep, activity, and readiness scores from the Ōura ring. The {reactablefmtr}, {tippy} and {sparkline} package facilitated the customiation of the table to my liking." 
 date: 2021-06-20
-draft: true
+draft: false
 author: "Irene van den Broek"
 tags: [Oura Ring, reactable, interactive charts]
 categories: [Sleep, Activity]
