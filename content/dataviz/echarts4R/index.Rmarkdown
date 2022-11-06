@@ -42,6 +42,8 @@ source("../../../../QuantifiedSelf/devices/OuraRing/src/echarts4r/src/e_stacked_
 source("../../../../QuantifiedSelf/devices/OuraRing/src/echarts4r/src/e_calendar.R")
 source("../../../../QuantifiedSelf/devices/OuraRing/src/echarts4r/src/e_trend.R")
 
+# Het is NIET handig dat ik alle e-charts in de RMarkdown file creeer, want iedere keer als ik een klein stukje tekst op het blog wil aanpassen dan moet ik alle indivudlee nieuwe gecreerde index files committen. Dat is een gedoe. Aanpassen.
+
 ```
 
 <a href="https://echarts4r.john-coene.com">
