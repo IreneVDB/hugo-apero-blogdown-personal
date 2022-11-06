@@ -1,0 +1,135 @@
+---
+title: "Reactable and reactablefmtr"
+subtitle: "R packages for creating interactive data tables"
+excerpt: "I tested the {reactable} package to create an interactive table for my sleep, activity, and readiness scores from the Ōura ring. The {reactablefmtr}, {tippy} and {sparkline} package facilitated the customiation of the table to my liking." 
+date: 2021-06-20
+draft: true
+author: "Irene van den Broek"
+tags: [Oura Ring, reactable, interactive charts]
+categories: [Sleep, Activity]
+layout: "single"
+links:
+- icon: github
+  icon_pack: fab
+  name: Code
+  url: https://github.com/IreneVDB/OuraRing/tree/main/src/reactable
+- icon: file
+  icon_pack: fas
+  name: reactable
+  url: https://glin.github.io/reactable/
+- icon: file
+  icon_pack: fas
+  name: reactablefmtr
+  url: https://kcuilla.github.io/reactablefmtr/
+
+---
+
+<style>body {text-align: justify}</style>
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, 
+                      warning = FALSE,
+                      message = FALSE,
+                      fig.width = 7)
+
+library(here)
+library(tidyverse)
+library(reactable)
+library(htmltools)
+library(sparkline)
+library(htmlwidgets)
+library(reactablefmtr)
+library(tippy)
+library(pins)
+
+# get oura data:
+oura <- pin_get("oura")
+# get the function to make reactable
+source("../../../../QuantifiedSelf/devices/OuraRing/src/reactable/Make_reactable.R")
+# create df for table:
+
+Scores <- bind_rows(map(oura, function(df){
+  is.score <- grep("score", colnames(df))
+  
+  df %>%
+    pivot_longer(., cols = contains("score"), names_to = "Score") %>%
+    group_by(Score) %>%
+    summarise(firstdate = first(Date),
+              lastdate = last(Date),
+              LastVal = last(value),
+              Mean = round(mean(value, na.rm = TRUE)),
+              All = list(value)) %>%
+    mutate(Score = str_to_sentence(ifelse(grepl("score_", Score) == TRUE, 
+                                          gsub("_", " ", str_extract(Score, pattern = "(?<=\\.score_).*$")), 
+                                          gsub("\\.", " ", Score))),
+           unit = "%",
+           limit = 60)
+}), .id = "Category")
+
+```
+
+I tested the [`{reactable}`](https://glin.github.io/reactable/) package to create an interactive table for my Sleep, Activity, and Readiness scores from the [Ōura ring](/blog/trackers/01-oura/). The `{reactablefmtr}`, `{tippy}` and `{sparkline}` package further facilitated the complete customization of the table.
+
+```{r reactable, echo=FALSE}
+Scores <- bind_rows(map(oura, function(df){
+  is.score <- grep("score", colnames(df))
+  
+  df %>%
+    pivot_longer(., cols = contains("score"), names_to = "Score") %>%
+    group_by(Score) %>%
+    summarise(firstdate = first(Date),
+              lastdate = last(Date),
+              LastVal = last(value),
+              Mean = round(mean(value, na.rm = TRUE)),
+              All = list(value)) %>%
+    mutate(Score = str_to_sentence(ifelse(grepl("score_", Score) == TRUE, 
+                                          gsub("_", " ", str_extract(Score, pattern = "(?<=\\.score_).*$")), 
+                                          gsub("\\.", " ", Score))),
+           unit = "%",
+           limit = 60)
+}), .id = "Category")
+
+score_tbl <- make.reactable.trend(Scores, name = "Score",
+                     title = "Sleep, activity and readiness scores")
+
+tbl_logo <- appendContent(score_tbl,
+              div(a(
+                img(src = knitr::image_uri(here("static", "img", "logo_grey.png")), width = 40, 
+                    alt = "Logo Je bent wat je Meet"), 
+                href="https://www.jebentwatjemeet.nl"),
+                style="text-align: center; padding-bottom:10px;"),
+              div("\u00A9 JeBentWatJeMeet 2021", 
+                  style="text-align:center; font-size:10px;
+                  padding-bottom:10px; font-family:Catamaran; color:#434d80"))
+
+div(style="background-color:#FFFFFF;",
+    tbl_logo
+    )
+```
+
+
+## Reactable
+
+The [`{reactable}`](https://glin.github.io/reactable/) package is an R package created by Greg Lin based on the React Table library and made with [reactR](https://github.com/react-R/reactR). With `{reactable}` you can easily create interactive data tables with options for e.g., sorting, filtering, and pagination. 
+
+The `colDef()` function defines the customization of each column in the table. The `aggregate` argument was used to group rows by Score type. Grouping by Activity, Sleep or Readiness was enabled with the `groupBy` argument in the `reactable()` function. 
+
+For every column, the `cell` argument defines the cell rendering. The `cell` argument can be an R function as well as a `JS()` function. As the latter seemed complicated, I was glad to discover the [`{reactablefmtr}`](https://kcuilla.github.io/reactablefmtr/) package that provides various easy-to-use  and highly customizable functions to render features such as databars, sparklines or icons. 
+
+<a href="https://kcuilla.github.io/reactablefmtr/">
+<img src="https://raw.githubusercontent.com/kcuilla/reactablefmtr/main/man/figures/logo.png" width="15%" style="float:left; margin:10px;"/>
+</a>
+
+## Reactablefmtr
+
+The [`{reactablefmtr}`](https://kcuilla.github.io/reactablefmtr/) package is an R package created by Kyle Cuilla that streamlines and enhances the styling and formatting of tables built with the `{reactable}` package, providing many conditional formatters that are highly customizable and easy to use.
+
+For example, the `data_bars()` and `icon_sets()` functions in the `cell` argument were used to create the data bars and icons in the *Last value* and *Trend* column, respectively. Some other useful functions from the `{reactablefmtr}` package include the `add_title()` and `add_subtitle()` functions to easily prepend a (sub)title to the table.
+
+## Sparkline
+
+Although the `{reactablefmtr}` package also offers a `react_sparkline()` function to enable easy rendering of sparklines, I couldn't really get it to work and, therefore, created a custom function using the `sparkline()` function from the [`{sparkline}`]((https://cran.r-project.org/web/packages/sparkline/sparkline.pdf)) package. With this function, the tiny bar chart showing the trend of the last 14 days, as well as the boxplots showing the distribution of _all_ scores were created.
+
+## Tippy
+
+Finally, I used the [`{tippy}`](https://cran.r-project.org/web/packages/tippy/tippy.pdf) package from John Coene to show the individual values when hoovering over the data bars in the _Trend_ column.

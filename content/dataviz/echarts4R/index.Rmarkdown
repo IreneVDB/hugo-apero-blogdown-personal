@@ -45,7 +45,7 @@ source("../../../../QuantifiedSelf/devices/OuraRing/src/echarts4r/src/e_trend.R"
 ```
 
 <a href="https://echarts4r.john-coene.com">
-<img src="https://echarts4r.john-coene.com/reference/figures/logo.png" ahref=width="25%" style="float:left; margin:10px;"/>
+<img src="https://echarts4r.john-coene.com/reference/figures/logo.png" width="25%" style="float:left; margin:10px;"/>
 </a>
 
 From the various _html widgets_ (R packages that interface with JavaScript visualization libraries), I immediately fell for the the [`{echarts4r}`](https://echarts4r.john-coene.com) package created by John Coene, because of the detailed documentation, the numerous and simple code examples, and the wide variety of possible chart types. I gave it a try and relatively easily created several interactive charts with this intuitive and versatile R package!
