@@ -1,7 +1,7 @@
 ---
 title: "Reactable and reactablefmtr"
 subtitle: "R packages for creating interactive data tables"
-excerpt: "I tested the {reactable} package to create an interactive table for my sleep, activity, and readiness scores from the Ōura ring. The {reactablefmtr}, {tippy} and {sparkline} package facilitated the customiation of the table to my liking." 
+excerpt: "I tested the {reactable} package to create an interactive table for my sleep, activity, and readiness scores from the Ōura ring. The {reactablefmtr}, {tippy} and {sparkline} packages further facilitated the complete customization of the table." 
 date: 2021-06-20
 draft: false
 author: "Irene van den Broek"
